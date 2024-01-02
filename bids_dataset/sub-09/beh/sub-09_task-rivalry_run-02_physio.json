@@ -1,0 +1,27 @@
+{
+    "Manufacturer": "TMSi SAGA",
+    "PowerLineFrequency": 60.0,
+    "SamplingFrequency": 100,
+    "RecordingDuration": 600.0015528476797,
+    "StartTime": 0.00861678458750248,
+    "Columns": [
+        "ecg",
+        "synchronous",
+        "asynchronous"
+    ],
+    "ecg": {
+        "Units": "mV",
+        "low_cutoff": "n/a",
+        "high_cutoff": "n/a"
+    },
+    "synchronous": {
+        "Units": "n/a",
+        "low_cutoff": "n/a",
+        "high_cutoff": "n/a"
+    },
+    "asynchronous": {
+        "Units": "n/a",
+        "low_cutoff": "n/a",
+        "high_cutoff": "n/a"
+    }
+}

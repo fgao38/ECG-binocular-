@@ -1,0 +1,11 @@
+{
+    "Name": "ecg-rivalry",
+    "BIDSVersion": "1.7.0",
+    "DatasetType": "raw",
+    "Authors":[
+      "John Veillette",
+      "Scott Gao",
+      "Howard Nusbaum"
+  ],
+    "EthicsApprovals": ["Social and Behavioral Sciences IRB23-1353 at the University of Chicago."]
+}
