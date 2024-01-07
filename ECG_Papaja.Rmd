@@ -45,7 +45,7 @@ classoption       : "man"
 output            : papaja::apa6_pdf
 ---
 
-```{r setup, include = FALSE}
+```{r setup, include = TRUE, warning = FALSE}
 #library("papaja")
 #r_refs("r-references.bib")
 #tinytex::install_tinytex(version = "2020.10")
