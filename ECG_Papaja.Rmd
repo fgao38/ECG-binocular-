@@ -1,0 +1,87 @@
+---
+title             : "ECG_Binocular_Rivalry_Paradigm"
+shorttitle        : "ECG_study"
+
+author: 
+  - name          : "Fan Gao"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "University of Chicago"
+    email         : "fgao38@uchicago.com"
+    role: # Contributorship roles (e.g., CRediT, https://credit.niso.org/)
+      - "Data collection"
+      - "Writing - Original Draft Preparation"
+      - "Writing - Review & Editing"
+
+affiliation:
+  - id            : "1"
+    institution   : "University of Chicago"
+
+authornote: |
+  
+  For this apa 6 style pdf document, I used Tinytex [https://github.com/rstudio/tinytex-releases]. 
+
+abstract: |
+  Though we are unconscious of most bodily sensations (e.g. immune system), in a place where the internal (i.e. self) and external (i.e. physical world) interact, interoceptive stimuli—the sensation that arises from an internal organ (e.g. heartbeat), have been found to yield an unexpected influence over how we see and sense the world (i.e. exteroceptive stimuli).  A substantial prior study has been dedicated to exploring how external stimuli affect our body and brain. For example, intentionally observing and recognizing external stimuli typically results in a deceleration of the heart rate, referred to as “bradycardia of attention” (Lacey, Kagan, Lacey, & Moss, 1963). Such an effect is further examined in a follow-up study that showed subjects’ heart rate decreased following a ready signal (Lacey & Lacey, 1978). These findings have provided us with a novel understanding of how exteroceptive stimuli (e.g. a ready signal at a traffic light) influence our interoceptive stimuli (e.g. heart rate), but also raises the interesting question about the reverse effect: could interoceptive stimuli have an influence on exteroceptive stimuli? The question may seem counterintuitive at first since most of the interoceptive stimuli within one’s self are not accessible (e.g. immune system, heartbeat). For example, studies have suggested that only a quarter of the participants could perceive and judge their heart rate that closely synchronized with external stimuli above chance (Brener, 2016). How can these interoceptive stimuli affect our perception of the world if we, for the most of time, do not have conscious access to them? Yet, recent research has shed light on this question.
+
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "ECG,Binocular-rivalry-paradigm,heart-rate,vision"
+wordcount         : "X"
+
+bibliography      : "r-references.bib"
+
+floatsintext      : no
+linenumbers       : yes
+draft             : no
+mask              : no
+
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+#library("papaja")
+#r_refs("r-references.bib")
+#tinytex::install_tinytex(version = "2020.10")
+#tinytex::install_tinytex(bundle = 'TinyTeX')
+source("Assignment02.R")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+
+# Methods
+Our experiment is going to be divided into two parts. In the first section, we are planning to use a binocular rivalry paradigm – presenting different visual stimuli, one to each eye of the participant; because the brain cannot process two visual stimuli simultaneously, one visual stimulus will dominate the other visual stimulus, see Figure 1. The idea is to synchronize one of the visual stimuli with the participant's heartbeat (measured by using an electrocardiogram ECG) in real-time; the synchronization of the heartbeat and visual stimulus is randomized, see Figure 2. Participants are not going to be told that one of the stimuli was synchronized with their real-time ECG; the Participants will identify which visual stimulus they are currently viewing by pressing the left (red) and right (blue) arrow keys. In the second section, we are going to measure whether the participants could judge the external stimulus that is synchronized with their own heartbeat correctly. This will be done by presenting two pulsing circles, one synchronizes with the participant's ECG (immediately followed at the R peak) and the other one does not (followed later after the R peak). 
+
+## Participants
+We aim to collect 60 undergraduate students taking Psychology courses at the University of Chicago. We are going to recruit participants through an online platform named SONA (Psychological and Brain Science Research System). Participants will need to have normal color vision and see well without glasses, as well as consent to participate in our study. Our participants' sample may not be representative since our sample consists of only college students, specifically students who are taking introductory Psychology courses. The introductory Psychology courses include a diverse population of students with different majors and backgrounds, but it is biased toward college and well-educated students at University of Chicago. However, as mentioned above, we do not expect that our results will vary significantly across races and genders since this effect is mostly driven by biological factors within the body. We are going to send our study protocol to the University of Chicago institutional review board for approval. 
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+
+# Results
+
+# Discussion
+
+
+\newpage
+
+# References
+
+::: {#refs custom-style="Bibliography"}
+:::
