@@ -6,7 +6,7 @@ localonly/
 
 # Testing to ignore one of my json file 
 
-/sub-01_task-discrimination_run-01_physio.json
+ECG-binocular-/bids_dataset/sub-01/beh/sub-01_task-discrimination_run-01_physio.json
 
 
 # History files
