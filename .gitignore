@@ -1,3 +1,14 @@
+# Ignore my localonly folder 
+localonly/
+
+# Ignore my .text file, I do not want to push text files
+*.tex
+
+# Testing to ignore one of my json file 
+
+/sub-01_task-discrimination_run-01_physio.json
+
+
 # History files
 .Rhistory
 .Rapp.history
