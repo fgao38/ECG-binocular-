@@ -4,9 +4,9 @@ localonly/
 # Ignore my .text file, I do not want to push text files
 *.tex
 
-# Testing 
+# Testing to not include this json file
 
-# ECG-binocular-/bids_dataset/sub-01/beh/sub-01_task-discrimination_run-01_physio.json
+sub-01_task-discrimination_run-01_physio.json
 
 
 # History files
