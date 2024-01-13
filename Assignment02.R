@@ -17,3 +17,11 @@ my_dict <- list(tom = 1, david = 2, sam = 3)
 my_df <- data.frame(names = names(my_dict), values = unlist(my_dict))
 print(my_df)
 
+#Function 
+
+helloworld <- function(name){
+  paste0("Hello ", name, "!")
+}
+
+helloworld("Scott")
+
