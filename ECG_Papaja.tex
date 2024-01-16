@@ -217,16 +217,69 @@ Though we are unconscious of most bodily sensations (e.g.~immune system), in a p
 ## sam     sam      3
 \end{verbatim}
 
+\hypertarget{hello_world-function}{%
+\subsubsection{\texorpdfstring{\emph{Hello\_world} function}{Hello\_world function}}\label{hello_world-function}}
+
+\begin{verbatim}
+## [1] "Today is: Monday Yes! I have no classes today"
+## [1] "Today is: Tuesday Hello Dr. Dowling! I hope you are having a great day!"
+## [1] "Today is: Wednesday Yes! I have no classes today"
+## [1] "Today is: Thursday Hello Dr. Dowling! I hope you are having a great day!"
+## [1] "Today is: Friday Yes! I have no classes today"
+## [1] "Today is: Saturday Yes! I have no classes today"
+## [1] "Today is: Sunday Yes! I have no classes today"
+## [1] "Today is: Monday Yes! I have no classes today"
+## [1] "Today is: Tuesday Good afternoon Dr.Hamilton"
+## [1] "Today is: Wednesday Yes! I have no classes today"
+## [1] "Today is: Thursday Good afternoon Dr.Hamilton"
+## [1] "Today is: Friday Yes! I have no classes today"
+## [1] "Today is: Saturday Yes! I have no classes today"
+## [1] "Today is: Sunday Yes! I have no classes today"
+## [1] "Today is: Monday Yes! I have no classes today"
+## [1] "Today is: Tuesday Good afternoon Dr.Wang"
+## [1] "Today is: Wednesday Yes! I have no classes today"
+## [1] "Today is: Thursday Good afternoon Dr.Wang"
+## [1] "Today is: Friday Yes! I have no classes today"
+## [1] "Today is: Saturday Yes! I have no classes today"
+## [1] "Today is: Sunday Yes! I have no classes today"
+## [1] "Today is: Monday Yes! I have no classes today"
+## [1] "Today is: Tuesday Yes! I have no classes today"
+## [1] "Today is: Wednesday Yes! I have no classes today"
+## [1] "Today is: Thursday Yes! I have no classes today"
+## [1] "Today is: Friday Yes! I have no classes today"
+## [1] "Today is: Saturday Yes! I have no classes today"
+## [1] "Today is: Sunday Yes! I have no classes today"
+\end{verbatim}
+
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
 
-Our experiment is going to be divided into two parts. In the first section, we are planning to use a binocular rivalry paradigm -- presenting different visual stimuli, one to each eye of the participant; because the brain cannot process two visual stimuli simultaneously, one visual stimulus will dominate the other visual stimulus, see Figure 1. The idea is to synchronize one of the visual stimuli with the participant's heartbeat (measured by using an electrocardiogram ECG) in real-time; the synchronization of the heartbeat and visual stimulus is randomized, see Figure 2. Participants are not going to be told that one of the stimuli was synchronized with their real-time ECG; the Participants will identify which visual stimulus they are currently viewing by pressing the left (red) and right (blue) arrow keys. In the second section, we are going to measure whether the participants could judge the external stimulus that is synchronized with their own heartbeat correctly. This will be done by presenting two pulsing circles, one synchronizes with the participant's ECG (immediately followed at the R peak) and the other one does not (followed later after the R peak).
+\textbf{Our experiment is going to be divided into two parts.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  In the first section, we are planning to use a binocular rivalry paradigm -- presenting different visual stimuli, one to each eye of the participant; because the brain cannot process two visual stimuli simultaneously, one visual stimulus will dominate the other visual stimulus, see Figure 1. The idea is to synchronize one of the visual stimuli with the participant's heartbeat (measured by using an electrocardiogram ECG) in real-time; the synchronization of the heartbeat and visual stimulus is randomized, see Figure 2.Participants are not going to be told that one of the stimuli was synchronized with their real-time ECG; the Participants will identify which visual stimulus they are currently viewing by pressing the left (red) and right (blue) arrow keys.
+\item
+  In the second section, we are going to measure whether the participants could judge the external stimulus that is synchronized with their own heartbeat correctly. This will be done by presenting two pulsing circles, one synchronizes with the participant's ECG (immediately followed at the R peak) and the other one does not (followed later after the R peak).
+\end{enumerate}
 
 \hypertarget{participants}{%
 \subsection{Participants}\label{participants}}
 
 We aim to collect 60 undergraduate students taking Psychology courses at the University of Chicago. We are going to recruit participants through an online platform named SONA (Psychological and Brain Science Research System). Participants will need to have normal color vision and see well without glasses, as well as consent to participate in our study. Our participants' sample may not be representative since our sample consists of only college students, specifically students who are taking introductory Psychology courses. The introductory Psychology courses include a diverse population of students with different majors and backgrounds, but it is biased toward college and well-educated students at University of Chicago. However, as mentioned above, we do not expect that our results will vary significantly across races and genders since this effect is mostly driven by biological factors within the body. We are going to send our study protocol to the University of Chicago institutional review board for approval.
-\#\# Material
+
+\hypertarget{material}{%
+\subsection{Material}\label{material}}
+
+\begin{itemize}
+\item
+  Electrocardiogram (ECG) was acquired at a 100 Hz sampling rate using a TMSi SAGA amplifier (TMSi, Netherlands)
+\item
+  ECG data was implemented in Python (see Data and Code Availability) using Lab Streaming Layer (LSL, labstreaminglayer.org)
+\item
+  ECG data were bandpass filtered to 5-15 Hz, and R-peaks were detected using the Pan-Thompkins algorithm (Pan \& Tompkins, 1985), modified from an existing implementation for LabGraph compatibility (Sznajder \& Łukowska, 2017)
+\end{itemize}
 
 \hypertarget{procedure}{%
 \subsection{Procedure}\label{procedure}}
@@ -259,6 +312,8 @@ Barth, M. (2023). \emph{{tinylabels}: Lightweight variable labels}. Retrieved fr
 R Core Team. (2022). \emph{R: A language and environment for statistical computing}. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.R-project.org/}
 
 \end{CSLReferences}
+
+Lacey, J.I., Kagan, J., Lacey, B.C. and Moss, H.A. (1963) The Visceral Level: Situational Determinants and Behavioral Correlates of Autonomic Response Patterns. In: Knapp, P.H., Ed., Expression of the Emotions in Man, International Universities Press, New York, 161-196. \url{https://www.scirp.org/reference/referencespapers?referenceid=3036305}
 
 
 \end{document}
