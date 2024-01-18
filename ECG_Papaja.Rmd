@@ -101,7 +101,4 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 # References
 
-::: {#refs custom-style="Bibliography"}
-:::
-
-Lacey, J.I., Kagan, J., Lacey, B.C. and Moss, H.A. (1963) The Visceral Level: Situational Determinants and Behavioral Correlates of Autonomic Response Patterns. In: Knapp, P.H., Ed., Expression of the Emotions in Man, International Universities Press, New York, 161-196. <https://www.scirp.org/reference/referencespapers?referenceid=3036305> 
+[Lacey, J.I., Kagan, J., Lacey, B.C. and Moss, H.A. (1963) The Visceral Level: Situational Determinants and Behavioral Correlates of Autonomic Response Patterns. In: Knapp, P.H., Ed., Expression of the Emotions in Man, International Universities Press, New York, 161-196.](https://www.scirp.org/reference/referencespapers?referenceid=3036305)
