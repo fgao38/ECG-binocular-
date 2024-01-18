@@ -1,0 +1,102 @@
+---
+title: "data_cleaning"
+author: "Fan Gao (Scott)"
+date: "2024-01-17"
+output: github_document
+---
+
+# Importing packages 
+
+```{r importing necessary packages}
+library(dplyr)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+```
+
+# Counting the number of datas inside BIDS
+```{r Counting number of files}
+folder_path <- "bids_dataset/Binocular_rivalry"
+files <- list.files(folder_path)
+print(length(files))
+```
+
+# Reading in 54 participants' data
+```{r function to read and compile all participants' file, message = FALSE}
+# creating a loop to extra all of the participants' information
+participant_data <- c()
+for(id in 1:58){
+  for(session_id in 1:2){
+    file_name <- sprintf("sub-%02d_task-rivalry_run-%02d_events", id, session_id)
+    file_path <- file.path(folder_path, paste0(file_name, ".tsv"))
+# debugging    
+#    cat("Checking file:", file_path, "\n")
+    if (file.exists(file_path)){
+      participant_session_data <- read_tsv(file_path)
+# adding participant id and session id      
+      participant_session_data$subject <- id
+      participant_session_data$session <- session_id
+# append all of participants information into a single data
+      participant_data <- append(participant_data, list(participant_session_data))
+      
+    }
+    #debugging
+    else {
+      cat("File not found:", file_path, "\n")
+      if (id %in% c(43, 53, 54, 56)) {
+        cat("Skipping missing participant:", id, "\n")
+      }
+      next
+  }
+}}
+final <- bind_rows(participant_data)
+```
+
+# Counting the number of participants in my new data to double check
+```{r}
+num_participants <- final %>% 
+  distinct(subject) %>% 
+  n_distinct()
+
+print(num_participants)
+```
+
+# Examine your dataset in RStudio. Answer these questions with comments in your read-in chunk
+- Tidy? 
+ - Yes, each column is a single variable, and they are "onset", "duration", "trail", "sync_side", "key", "dominant", "subject", "session"
+
+ - Yes, each row is a single observation, for example each row is corrsponding to each participant at each moment, wether he/she pressing the key responding to sychronized and unsychronized heartrate. 
+ - Yes, each cell is a single measurment, for example under "dominant", each cell is corrsponding to whether the participant pressed the key under sycrhonized or unsychronized heartrate condition. 
+- It is tidy enough, I just need to drop some NAs. 
+- The dominant, duration, key, participant, sessions are useful variable for this analysis; onset and trails are not useful variables.
+
+```{r }
+write.csv(final, "bids_dataset/compiled_part.csv",row.names = FALSE)
+```
+
+```{r}
+sub_data <- final %>% 
+  mutate(duration = as.numeric(duration)) %>% 
+  drop_na(duration) %>% 
+  group_by(subject,dominant) %>% 
+  summarize(total_duration = sum(duration, na.rm = TRUE))
+```
+
+```{r}
+
+filtered_data <- final %>% 
+  drop_na(duration) %>% 
+  data.frame(duration = as.numeric(final$duration))
+# debugging
+has_nas <- any(is.na(filtered_data$duration))
+has_nas
+```
+
+```{r graph}
+# Still working on graphing
+dot_plot <- ggplot(filtered_data, aes(x = dominant, y = duration)) +
+  geom_dotplot(binaxis = "y", stackdir = "center", dotsize = 0.5, binwidth = 0.1) +
+  labs(x = "dominant", y = "duration") +
+  theme_minimal()
+dot_plot
+```
