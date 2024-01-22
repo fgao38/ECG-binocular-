@@ -22,7 +22,7 @@ print(length(files))
 ```
 
 # Reading in 54 participants' data
-```{r function to read and compile all participants' file, message = FALSE}
+```{r function to read and compile all participants' file, message = FALSE, warning = FALSE}
 # creating a loop to extra all of the participants' information
 participant_data <- c()
 for(id in 1:58){
@@ -32,7 +32,7 @@ for(id in 1:58){
 # debugging    
 #    cat("Checking file:", file_path, "\n")
     if (file.exists(file_path)){
-      participant_session_data <- read_tsv(file_path)
+      participant_session_data <- read_tsv(file_path, show_col_types = FALSE)
 # adding participant id and session id      
       participant_session_data$subject <- id
       participant_session_data$session <- session_id
@@ -53,7 +53,7 @@ final <- bind_rows(participant_data)
 ```
 
 # Counting the number of participants in my new data to double check
-```{r}
+```{r confirming the number of participants}
 num_participants <- final %>% 
   distinct(subject) %>% 
   n_distinct()
@@ -70,18 +70,21 @@ print(num_participants)
 - It is tidy enough, I just need to drop some NAs. 
 - The dominant, duration, key, participant, sessions are useful variable for this analysis; onset and trails are not useful variables.
 
-```{r }
+```{r write out the data frame to a csv}
 write.csv(final, "bids_dataset/compiled_part.csv",row.names = FALSE)
 ```
 
-```{r}
+# Using dplyr functions
+```{r grouping datas, warning = FALSE}
 sub_data <- final %>% 
   mutate(duration = as.numeric(duration)) %>% 
   drop_na(duration) %>% 
   group_by(subject,dominant) %>% 
   summarize(total_duration = sum(duration, na.rm = TRUE))
+write.csv(sub_data, "bids_dataset/total_durations.csv",row.names = FALSE)
 ```
 
+# Creating a new sub data for graphing purpose
 ```{r}
 
 filtered_data <- final %>% 
@@ -92,11 +95,14 @@ has_nas <- any(is.na(filtered_data$duration))
 has_nas
 ```
 
+# Graphing
 ```{r graph}
 # Still working on graphing
-dot_plot <- ggplot(filtered_data, aes(x = dominant, y = duration)) +
-  geom_dotplot(binaxis = "y", stackdir = "center", dotsize = 0.5, binwidth = 0.1) +
-  labs(x = "dominant", y = "duration") +
-  theme_minimal()
-dot_plot
+
+#dot_plot <- ggplot(filtered_data, aes(x = dominant, y = duration)) +
+#  geom_dotplot(binaxis = "y", stackdir = "center", dotsize = 0.5, binwidth = 0.1) +
+#  labs(x = "dominant", y = "duration") +
+#  theme_minimal()
+#dot_plot
+
 ```
