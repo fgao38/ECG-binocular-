@@ -59,7 +59,7 @@ folder_path <- "bids_dataset/Binocular_rivalry"
   # Display the t-test results
   print(t_test_result)
 
-# t = -2.5272(p<0.05)  
+# t = -2.5272(p<0.05)  lme4/glmer
   
 # Using dplyr functions and write out my grouped file as a csv file
   sub_data <- final %>% 
