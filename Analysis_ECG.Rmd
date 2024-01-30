@@ -84,25 +84,162 @@ sub_data <- final %>%
 write.csv(sub_data, "bids_dataset/total_durations.csv",row.names = FALSE)
 ```
 
-# Creating a new sub data for graphing purpose
-```{r}
-
-filtered_data <- final %>% 
-  drop_na(duration) %>% 
-  data.frame(duration = as.numeric(final$duration))
-# debugging
-has_nas <- any(is.na(filtered_data$duration))
-has_nas
+# Average duration
+```{r average duration}
+average_duration <- final %>%
+  filter(!(duration == "n/a" | dominant == "n/a")) %>% 
+  group_by(subject, dominant) %>%
+  summarize(average_duration = mean(as.numeric(duration), na.rm = TRUE))
 ```
 
+# Total duration for each participant
+```{r total duration}
+filtered_data <- final %>% 
+  filter(!(duration == "n/a" | dominant == "n/a")) %>% 
+  mutate(duration = as.numeric(duration)) %>%
+  data.frame()
+# debugging
+# has_nas <- any(is.na(filtered_data$duration))
+# has_nas
+```
+
+### Conducting analysis
+
+```{r paired t-test}
+# Example of the t-test
+  
+  # Perform a t-test comparing 'duration' between two groups of 'dominant'
+  t_test_result <- t.test(average_duration ~ dominant, data = average_duration, paired = TRUE)
+  
+  # Display the t-test results
+  print(t_test_result)
+
+# t = -2.5272(p<0.05)  lme4/glmer
+
+```
+
+```{r}
+# Assuming your data frame is named df
+library(lme4)
+
+# Fit a linear mixed-effects model
+lmer_model <- lmer(average_duration ~ dominant + (1 | subject), data = average_duration)
+
+# Print the summary of the model
+summary(lmer_model)
+```
+
+# Conducting paired t-test
+```{r Conducting paired t-test}
+average_duration[average_duration$dominant == 'synchronous',]
+average_duration[average_duration$dominant == 'synchronous',]$average_duration
+sync <- average_duration[average_duration$dominant == 'synchronous',]$average_duration
+async <- average_duration[average_duration$dominant == 'asynchronous',]$average_duration
+t.test(sync, async, paired = TRUE)
+```
+
+# Conducting one way t-test
+```{r Conducting one way t-test}
+t.test(sync, async, paired = TRUE, alternative = 'greater')
+```
+# conducting Generalized Linear Mixed-Effects Models dominant + subject
+
+```{r glmer dominant and subject}
+glmer(duration ~ dominant + (1 + dominant|subject), 
+      family = Gamma(link = 'log'), 
+      data = filtered_data)
+fit <- glmer(duration ~ dominant + (1 + dominant|subject), 
+             family = Gamma(link = 'log'), 
+             data = filtered_data)
+summary(fit)
+```
+# conducting Generalized Linear Mixed-Effects Models dominant + subject
+```{r glmer subject}
+fit1 <- glmer(duration ~ dominant + (1|subject), 
+              family = Gamma(link = 'log'), 
+              data = filtered_data)
+summary(fit1)
+```
+# conducting Generalized Linear Mixed-Effects Models key + subject
+```{r glmer subject+key}
+fit2 <- glmer(duration ~ dominant +  key + (1 + key|subject), 
+             family = Gamma(link = 'log'), 
+             data = filtered_data)
+summary(fit2)
+```
+
+
 # Graphing
+
+### line plot
+- In this plot, syn and asyn are on the axis. 
+- This is a point plot with line plot connect the points
+- I am comparing the dominance(syn + asyn) across 54 participants
+- I am expecting that the line should overall going up because participants should overall spend more time on syn stimulus
+```{r line plot average syn vs asyn}
+
+ggplot(average_duration, aes(x = dominant, 
+                             y = average_duration,
+                             group = subject,
+                             color = factor(subject)))+
+  geom_line(aes(linetype = factor(subject)), size = 1) +
+  geom_point(size = 3) +
+  stat_summary(aes(group = 1), fun = mean, geom = "line", linetype = "dashed", color = "black", size = 1) +
+  labs(title = "Average duration for syn and asyn",
+       x = "Dominance",
+       y = "Average Duration") +
+  theme_minimal()
+```
+
+### Histogram
+- The substracted average duration Syn - Asyn are on x-axis, the y axis represents count
+- This is a histogram
+- I am comparing the difference across 54 participants
+- I am anticipate to see more results lies on >0 because when Syn - Asyn should be positive values
+```{r Histogram substracted difference syn - asyn}
+average_diff <- average_duration %>%
+  group_by(subject) %>%
+  summarise(diff_duration = mean(average_duration[dominant == "synchronous"]) - mean(average_duration[dominant == "asynchronous"]))
+
+ggplot(average_diff, aes(x = diff_duration)) +
+  geom_histogram(binwidth = 0.1, fill = "blue", color = "black", alpha = 0.7) +
+  labs(title = "Difference in Average Duration (Syn - Asyn)",
+       x = "Difference in Duration",
+       y = "Count") +
+  theme_minimal()
+```
+### Below are my experimenting graphs...
 ```{r graph}
 # Still working on graphing
-
-#dot_plot <- ggplot(filtered_data, aes(x = dominant, y = duration)) +
-#  geom_dotplot(binaxis = "y", stackdir = "center", dotsize = 0.5, binwidth = 0.1) +
+#dot_plot <- ggplot(average_duration, aes(x = dominant, y = average_duration)) +
+#  geom_dotplot(binaxis = "y", stackdir = "center", dotsize = 0.5, binwidth = 0.1, position = "jitter") +
 #  labs(x = "dominant", y = "duration") +
 #  theme_minimal()
 #dot_plot
 
 ```
+```{r}
+
+#ggplot(average_duration, aes(x = dominant, y = average_duration)) +
+#  geom_boxplot() +
+#  labs(x = "dominant", y = "duration") +
+#  theme_minimal()
+```
+
+```{r}
+
+#ggplot(average_duration, aes(x = dominant, y = average_duration)) +
+#  geom_violin() +
+#  labs(x = "dominant", y = "duration") +
+#  theme_minimal()
+```
+
+```{r}
+#ggplot(average_duration, aes(x = dominant, y = average_duration)) +
+#  geom_point(position = position_jitter(width = 0.2)) +
+#  labs(x = "dominant", y = "duration") +
+#  theme_minimal() +
+#  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
