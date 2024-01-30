@@ -22,7 +22,7 @@ print(length(files))
 ```
 
 # Reading in 54 participants' data
-```{r function to read and compile all participants' file, message = FALSE, warning = FALSE}
+```{r read-and-compile-participants, message = FALSE, warning = FALSE}
 # creating a loop to extra all of the participants' information
 participant_data <- c()
 for(id in 1:58){
