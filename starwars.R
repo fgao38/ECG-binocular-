@@ -1,5 +1,6 @@
 library(tidyverse)
-
+library(ggplot2)
+library(dplyr)
 ## Create your goal tibble to replicate
 
 # Run this line to see what your end product should look like
@@ -64,3 +65,39 @@ str(sw.wrangled.goal)
 ## Check that your sw.wrangled df is identical to the goal df
 # Use any returned information about mismatches to adjust your code as needed
 all.equal(sw.wrangled.goal, sw.wranged)
+
+# Graphing
+## Histogram
+ggplot(sw.wranged, aes(x = height_cm)) +
+  geom_histogram() +
+  labs(title = "Count of height(cm) in starwars",
+       x = "height_cm",
+       y = "count") +
+  theme_minimal()
+
+## Bar Graph
+# reorder first
+sw.wranged_table <- table(sw.wranged $ hair)
+sw.wranged_table_df <- data.frame(sw.wranged_table)
+sw.wranged_table_df$Var1 <- reorder(sw.wranged_table_df$Var1,-sw.wranged_table_df$Freq)
+
+ggplot(sw.wranged_table_df, aes(x = Var1, y = Freq)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Count of hair in starwars",
+       x = "hair",
+       y = "count") +
+  theme_minimal()
+
+## Dot plot
+
+ggplot(sw.wranged, aes(x = height_in, y = mass)) +
+  geom_point(shape = "triangle") +
+  labs(title = "Dot Plot of Height vs Mass",
+       x = "Height",
+       y = "Mass") +
+  theme_minimal() +
+  coord_cartesian(xlim = c(0, 100), ylim = c(0, 170)) +
+  scale_x_continuous(breaks = c(40, 60, 80)) +
+  scale_y_continuous(breaks = c(40, 80, 120, 160))
+
+

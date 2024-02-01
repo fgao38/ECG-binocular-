@@ -187,7 +187,8 @@ ggplot(average_duration, aes(x = dominant,
   stat_summary(aes(group = 1), fun = mean, geom = "line", linetype = "dashed", color = "black", size = 1) +
   labs(title = "Average duration for syn and asyn",
        x = "Dominance",
-       y = "Average Duration") +
+       y = "Average Duration",
+       subtitle = "n=54") +
   theme_minimal()
 ```
 
@@ -205,7 +206,8 @@ ggplot(average_diff, aes(x = diff_duration)) +
   geom_histogram(binwidth = 0.1, fill = "blue", color = "black", alpha = 0.7) +
   labs(title = "Difference in Average Duration (Syn - Asyn)",
        x = "Difference in Duration",
-       y = "Count") +
+       y = "Count",
+       subtitle = "n=54") +
   theme_minimal()
 ```
 ### Below are my experimenting graphs...
