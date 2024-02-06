@@ -84,6 +84,7 @@ sub_data <- final %>%
 write.csv(sub_data, "bids_dataset/total_durations.csv",row.names = FALSE)
 ```
 
+
 # Average duration
 ```{r average duration}
 average_duration <- final %>%
@@ -184,7 +185,7 @@ ggplot(average_duration, aes(x = dominant,
                              color = factor(subject)))+
   geom_line(aes(linetype = factor(subject)), size = 1) +
   geom_point(size = 3) +
-  stat_summary(aes(group = 1), fun = mean, geom = "line", linetype = "dashed", color = "black", size = 1) +
+  stat_summary(aes(group = 1), fun = mean, geom = "line", linetype = "solid", color = "black", size = 1) +
   labs(title = "Average duration for syn and asyn",
        x = "Dominance",
        y = "Average Duration",

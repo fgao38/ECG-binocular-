@@ -100,4 +100,36 @@ ggplot(sw.wranged, aes(x = height_in, y = mass)) +
   scale_x_continuous(breaks = c(40, 60, 80)) +
   scale_y_continuous(breaks = c(40, 80, 120, 160))
 
+# Box Plot 
+ggplot(sw.wranged, aes(x = hair, y = mass, fill = hair)) +
+  geom_boxplot() +
+  labs(title = "Hair vs Mass",
+       x = "Hair Color(s)",
+       y = "Mass(kg)",
+       fill = "Corlorful hair")+
+  coord_cartesian(ylim = c(0, 170)) +
+  scale_x_discrete(limits = levels(sw.wranged_table_df$Var1)) +
+  scale_fill_discrete(limits = levels(sw.wranged_table_df$Var1)) +
+  scale_y_continuous(breaks = c(40, 80, 120, 160))
 
+
+
+
+# Smooth point plot 
+# Get rid of outlier
+filtered_data <- sw.wranged %>%
+  filter(mass < 1000)
+# Creating the plot
+custom_labels <- c("TRUE" = "Has brown hair",
+                   "FALSE" = "No brown hair")
+
+ggplot(filtered_data, aes(x = mass, y = height_in)) +
+  geom_smooth(method = "lm", se = TRUE) +
+  geom_point() +
+  labs(title = "Mass vs. height by brown-hair havingness",
+       x = "mass",
+       y = "height_in",
+       subtitle = "A critically important analysis")+
+  facet_wrap(~brown_hair, labeller = as_labeller(custom_labels)) +
+  coord_cartesian(xlim = c(0, 200), ylim = c(-4, 200)) +
+  theme_minimal()
