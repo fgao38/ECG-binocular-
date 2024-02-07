@@ -166,12 +166,12 @@ write.csv(sub_data, "bids_dataset/total_durations.csv",row.names = FALSE)
 ``` r
 average_duration <- final %>%
   filter(!(duration == "n/a" | dominant == "n/a")) %>% 
-  group_by(subject, dominant) %>%
+  group_by(subject, sync_side, dominant) %>%
   summarize(average_duration = mean(as.numeric(duration), na.rm = TRUE))
 ```
 
-    ## `summarise()` has grouped output by 'subject'. You can override using the
-    ## `.groups` argument.
+    ## `summarise()` has grouped output by 'subject', 'sync_side'. You can override
+    ## using the `.groups` argument.
 
 # Total duration for each participant
 
@@ -201,13 +201,13 @@ filtered_data <- final %>%
     ##  Paired t-test
     ## 
     ## data:  average_duration by dominant
-    ## t = -1.8347, df = 53, p-value = 0.07217
+    ## t = -1.7111, df = 107, p-value = 0.08997
     ## alternative hypothesis: true mean difference is not equal to 0
     ## 95 percent confidence interval:
-    ##  -0.22701307  0.01011334
+    ##  -0.25273600  0.01856601
     ## sample estimates:
     ## mean difference 
-    ##      -0.1084499
+    ##       -0.117085
 
 ``` r
 # t = -2.5272(p<0.05)  lme4/glmer
@@ -239,26 +239,26 @@ summary(lmer_model)
     ## Formula: average_duration ~ dominant + (1 | subject)
     ##    Data: average_duration
     ## 
-    ## REML criterion at convergence: 224.4
+    ## REML criterion at convergence: 477.3
     ## 
     ## Scaled residuals: 
     ##     Min      1Q  Median      3Q     Max 
-    ## -3.2746 -0.2165 -0.0573  0.2086  4.8760 
+    ## -5.6456 -0.3954 -0.0449  0.3498  3.0874 
     ## 
     ## Random effects:
     ##  Groups   Name        Variance Std.Dev.
-    ##  subject  (Intercept) 1.03172  1.0157  
-    ##  Residual             0.09434  0.3072  
-    ## Number of obs: 108, groups:  subject, 54
+    ##  subject  (Intercept) 1.0261   1.013   
+    ##  Residual             0.2591   0.509   
+    ## Number of obs: 216, groups:  subject, 54
     ## 
     ## Fixed effects:
     ##                     Estimate Std. Error t value
-    ## (Intercept)          2.64021    0.14441  18.283
-    ## dominantsynchronous  0.10845    0.05911   1.835
+    ## (Intercept)          2.65511    0.14629   18.15
+    ## dominantsynchronous  0.11708    0.06927    1.69
     ## 
     ## Correlation of Fixed Effects:
     ##             (Intr)
-    ## dmnntsynchr -0.205
+    ## dmnntsynchr -0.237
 
 # Conducting paired t-test
 
@@ -266,33 +266,42 @@ summary(lmer_model)
 average_duration[average_duration$dominant == 'synchronous',]
 ```
 
-    ## # A tibble: 54 × 3
-    ## # Groups:   subject [54]
-    ##    subject dominant    average_duration
-    ##      <int> <chr>                  <dbl>
-    ##  1       1 synchronous             1.74
-    ##  2       2 synchronous             3.20
-    ##  3       3 synchronous             3.91
-    ##  4       4 synchronous             3.73
-    ##  5       5 synchronous             2.83
-    ##  6       6 synchronous             1.21
-    ##  7       7 synchronous             1.62
-    ##  8       8 synchronous             4.21
-    ##  9       9 synchronous             1.89
-    ## 10      10 synchronous             9.63
-    ## # ℹ 44 more rows
+    ## # A tibble: 108 × 4
+    ## # Groups:   subject, sync_side [108]
+    ##    subject sync_side dominant    average_duration
+    ##      <int> <chr>     <chr>                  <dbl>
+    ##  1       1 left      synchronous             1.54
+    ##  2       1 right     synchronous             2.04
+    ##  3       2 left      synchronous             3.22
+    ##  4       2 right     synchronous             3.19
+    ##  5       3 left      synchronous             4.45
+    ##  6       3 right     synchronous             3.40
+    ##  7       4 left      synchronous             4.85
+    ##  8       4 right     synchronous             2.84
+    ##  9       5 left      synchronous             3.18
+    ## 10       5 right     synchronous             2.54
+    ## # ℹ 98 more rows
 
 ``` r
 average_duration[average_duration$dominant == 'synchronous',]$average_duration
 ```
 
-    ##  [1] 1.743880 3.201954 3.909915 3.730280 2.831163 1.208105 1.622574 4.213632
-    ##  [9] 1.894324 9.625352 2.934931 2.086315 1.251889 2.117697 2.013234 2.440120
-    ## [17] 3.349135 2.824185 2.017624 1.632808 2.603979 3.285624 3.430582 1.525600
-    ## [25] 2.680354 2.876360 3.527354 2.180540 2.795232 3.485889 3.243082 2.397631
-    ## [33] 3.776834 2.113516 2.193779 2.983784 2.577060 1.877041 3.408991 2.354018
-    ## [41] 2.439674 1.938565 3.112015 3.278496 2.374210 2.624420 2.184329 2.083668
-    ## [49] 3.157358 1.676587 3.088676 3.706757 2.647031 2.149433
+    ##   [1] 1.5381747 2.0408492 3.2204919 3.1850272 4.4514676 3.4017917 4.8506552
+    ##   [8] 2.8405700 3.1788764 2.5374043 1.5669746 0.9558916 1.3458174 1.9246347
+    ##  [15] 4.0288723 4.3904742 1.7714777 2.0256165 9.5714462 9.6705168 3.2625604
+    ##  [22] 2.6489501 2.1240639 2.0469255 1.3510059 1.1711681 2.1362545 2.0999013
+    ##  [29] 2.0662479 1.9612535 2.4456740 2.4342911 2.6635223 4.2484459 2.5605051
+    ##  [36] 3.1142330 2.1455448 1.9104911 1.3568758 1.9318725 2.7010978 2.5068611
+    ##  [43] 3.4209738 3.1640848 3.5305408 3.3248775 1.3456866 1.7584931 2.1389284
+    ##  [50] 3.4488301 2.4371686 3.4253482 3.3569464 3.7313941 2.4876966 1.8755009
+    ##  [57] 2.8590758 2.7361171 2.9254591 4.1643049 3.0878120 3.3932337 2.1778271
+    ##  [64] 2.6439639 3.6703511 3.9003531 2.4664165 1.7883432 1.7605971 2.7407622
+    ##  [71] 2.8004603 3.1746675 2.2277481 3.0630598 1.5832928 2.2509029 3.3293866
+    ##  [78] 3.4913722 2.4428135 2.2652230 2.3625592 2.5137992 1.4868848 2.5909928
+    ##  [85] 3.1837988 3.0241852 3.7446250 2.8173249 2.2501946 2.4943194 1.5512955
+    ##  [92] 3.8479834 2.1046538 2.2514526 1.9905369 2.1788844 2.6446685 3.6543530
+    ##  [99] 1.6248060 1.7305125 3.0733311 3.1033745 4.7708524 3.0321966 2.8552472
+    ## [106] 2.4388150 2.1283307 2.1719119
 
 ``` r
 sync <- average_duration[average_duration$dominant == 'synchronous',]$average_duration
@@ -304,13 +313,13 @@ t.test(sync, async, paired = TRUE)
     ##  Paired t-test
     ## 
     ## data:  sync and async
-    ## t = 1.8347, df = 53, p-value = 0.07217
+    ## t = 1.7111, df = 107, p-value = 0.08997
     ## alternative hypothesis: true mean difference is not equal to 0
     ## 95 percent confidence interval:
-    ##  -0.01011334  0.22701307
+    ##  -0.01856601  0.25273600
     ## sample estimates:
     ## mean difference 
-    ##       0.1084499
+    ##        0.117085
 
 # Conducting one way t-test
 
@@ -322,13 +331,13 @@ t.test(sync, async, paired = TRUE, alternative = 'greater')
     ##  Paired t-test
     ## 
     ## data:  sync and async
-    ## t = 1.8347, df = 53, p-value = 0.03609
+    ## t = 1.7111, df = 107, p-value = 0.04498
     ## alternative hypothesis: true mean difference is greater than 0
     ## 95 percent confidence interval:
-    ##  0.009489886         Inf
+    ##  0.003547533         Inf
     ## sample estimates:
     ## mean difference 
-    ##       0.1084499
+    ##        0.117085
 
 # conducting Generalized Linear Mixed-Effects Models dominant + subject
 
@@ -491,11 +500,21 @@ ggplot(average_duration, aes(x = dominant,
                              color = factor(subject)))+
   geom_line(aes(linetype = factor(subject)), size = 1) +
   geom_point(size = 3) +
-  stat_summary(aes(group = 1), fun = mean, geom = "line", linetype = "dashed", color = "black", size = 1) +
+  stat_summary(aes(group = 1), fun = mean, geom = "line", linetype = "solid", color = "black", size = 1) +
   labs(title = "Average duration for syn and asyn",
        x = "Dominance",
-       y = "Average Duration") +
-  theme_minimal()
+       y = "Average Duration",
+       subtitle = "n=54") +
+  facet_wrap(~sync_side, scales = "free") +
+  theme(panel.background = element_rect(fill = 'mistyrose'),
+        panel.grid.major = element_line(linetype = 'dashed', color="grey"),
+        panel.border = element_rect(colour = "black", fill = NA, linetype = 1),
+        axis.text = element_text(colour = "black", 
+                                 face = "italic", 
+                                 family = "Times New Roman"),
+        strip.background = element_rect(fill = "darkgreen"),
+        strip.text = element_text(color = "white", hjust = 0),
+        text = element_text(family = "Times New Roman"))
 ```
 
     ## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
@@ -504,7 +523,8 @@ ggplot(average_duration, aes(x = dominant,
     ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
     ## generated.
 
-![](Analysis_ECG_files/figure-gfm/line%20plot%20average%20syn%20vs%20asyn-1.png)<!-- -->
+![Average Duration for Syn and
+Asyn](Analysis_ECG_files/figure-gfm/line%20plot%20average%20syn%20vs%20asyn-1.png)
 
 ### Histogram
 
@@ -517,19 +537,46 @@ ggplot(average_duration, aes(x = dominant,
 
 ``` r
 average_diff <- average_duration %>%
-  group_by(subject) %>%
+  group_by(subject, sync_side) %>%
   summarise(diff_duration = mean(average_duration[dominant == "synchronous"]) - mean(average_duration[dominant == "asynchronous"]))
+```
 
+    ## `summarise()` has grouped output by 'subject'. You can override using the
+    ## `.groups` argument.
+
+``` r
 ggplot(average_diff, aes(x = diff_duration)) +
   geom_histogram(binwidth = 0.1, fill = "blue", color = "black", alpha = 0.7) +
   labs(title = "Difference in Average Duration (Syn - Asyn)",
        x = "Difference in Duration",
-       y = "Count") +
-  theme_minimal()
+       y = "Count",
+       subtitle = "n=54") +
+  facet_wrap(~sync_side, scales = "free") +
+  theme(panel.background = element_rect(fill = 'mistyrose'),
+        panel.grid.major = element_line(linetype = 'dashed', color="grey"),
+        panel.border = element_rect(colour = "black", fill = NA, linetype = 1),
+        axis.text = element_text(colour = "black", 
+                                 face = "italic", 
+                                 family = "Times New Roman"),
+        strip.background = element_rect(fill = "darkgreen"),
+        strip.text = element_text(color = "white", hjust = 0),
+        text = element_text(family = "Times New Roman"))
 ```
 
-![](Analysis_ECG_files/figure-gfm/Histogram%20substracted%20difference%20syn%20-%20asyn-1.png)<!-- -->
-\### Below are my experimenting graphs…
+![Histogram for substracted
+difference](Analysis_ECG_files/figure-gfm/Histogram%20substracted%20difference%20syn%20-%20asyn-1.png)
+
+``` r
+#ggplot(average_duration, aes(x = sync_side, y = average_duration, fill = dominant)) +
+#  geom_boxplot() +
+#  labs(title = "Syn vs. Average Duration",
+#       x = "Syn",
+#       y = "Average Duration",
+#       fill = "Sync_side") +
+# coord_cartesian(ylim = c(0, 6))
+```
+
+### Below are my experimenting graphs…
 
 ``` r
 # Still working on graphing

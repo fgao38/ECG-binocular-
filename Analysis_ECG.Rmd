@@ -89,7 +89,7 @@ write.csv(sub_data, "bids_dataset/total_durations.csv",row.names = FALSE)
 ```{r average duration}
 average_duration <- final %>%
   filter(!(duration == "n/a" | dominant == "n/a")) %>% 
-  group_by(subject, dominant) %>%
+  group_by(subject, sync_side, dominant) %>%
   summarize(average_duration = mean(as.numeric(duration), na.rm = TRUE))
 ```
 
@@ -177,8 +177,7 @@ summary(fit2)
 - This is a point plot with line plot connect the points
 - I am comparing the dominance(syn + asyn) across 54 participants
 - I am expecting that the line should overall going up because participants should overall spend more time on syn stimulus
-```{r line plot average syn vs asyn}
-
+```{r line plot average syn vs asyn, fig.cap = "Average Duration for Syn and Asyn"}
 ggplot(average_duration, aes(x = dominant, 
                              y = average_duration,
                              group = subject,
@@ -190,7 +189,16 @@ ggplot(average_duration, aes(x = dominant,
        x = "Dominance",
        y = "Average Duration",
        subtitle = "n=54") +
-  theme_minimal()
+  facet_wrap(~sync_side, scales = "free") +
+  theme(panel.background = element_rect(fill = 'mistyrose'),
+        panel.grid.major = element_line(linetype = 'dashed', color="grey"),
+        panel.border = element_rect(colour = "black", fill = NA, linetype = 1),
+        axis.text = element_text(colour = "black", 
+                                 face = "italic", 
+                                 family = "Times New Roman"),
+        strip.background = element_rect(fill = "darkgreen"),
+        strip.text = element_text(color = "white", hjust = 0),
+        text = element_text(family = "Times New Roman"))
 ```
 
 ### Histogram
@@ -198,9 +206,9 @@ ggplot(average_duration, aes(x = dominant,
 - This is a histogram
 - I am comparing the difference across 54 participants
 - I am anticipate to see more results lies on >0 because when Syn - Asyn should be positive values
-```{r Histogram substracted difference syn - asyn}
+```{r Histogram substracted difference syn - asyn, fig.cap = "Histogram for substracted difference"}
 average_diff <- average_duration %>%
-  group_by(subject) %>%
+  group_by(subject, sync_side) %>%
   summarise(diff_duration = mean(average_duration[dominant == "synchronous"]) - mean(average_duration[dominant == "asynchronous"]))
 
 ggplot(average_diff, aes(x = diff_duration)) +
@@ -209,8 +217,34 @@ ggplot(average_diff, aes(x = diff_duration)) +
        x = "Difference in Duration",
        y = "Count",
        subtitle = "n=54") +
-  theme_minimal()
+  facet_wrap(~sync_side, scales = "free") +
+  theme(panel.background = element_rect(fill = 'mistyrose'),
+        panel.grid.major = element_line(linetype = 'dashed', color="grey"),
+        panel.border = element_rect(colour = "black", fill = NA, linetype = 1),
+        axis.text = element_text(colour = "black", 
+                                 face = "italic", 
+                                 family = "Times New Roman"),
+        strip.background = element_rect(fill = "darkgreen"),
+        strip.text = element_text(color = "white", hjust = 0),
+        text = element_text(family = "Times New Roman"))
 ```
+```{r}
+
+
+#ggplot(average_duration, aes(x = sync_side, y = average_duration, fill = dominant)) +
+#  geom_boxplot() +
+#  labs(title = "Syn vs. Average Duration",
+#       x = "Syn",
+#       y = "Average Duration",
+#       fill = "Sync_side") +
+# coord_cartesian(ylim = c(0, 6))
+
+
+
+```
+
+
+
 ### Below are my experimenting graphs...
 ```{r graph}
 # Still working on graphing
