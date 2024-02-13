@@ -2,8 +2,14 @@
 title: "data_cleaning"
 author: "Fan Gao (Scott)"
 date: "2024-01-17"
-output: github_document
+output: 
+  bookdown::html_document2:
+    toc: true
 ---
+
+This is my first (Table \@ref(tab:kable)); this is my first (Figure \@ref(fig:lineplot)), and this is my second (Figure \@ref(fig:Histogram))
+
+
 
 # Importing packages 
 
@@ -12,6 +18,9 @@ library(dplyr)
 library(readr)
 library(tidyverse)
 library(ggplot2)
+library(stats)
+library(knitr)
+library(kableExtra)
 ```
 
 # Counting the number of datas inside BIDS
@@ -169,6 +178,11 @@ fit2 <- glmer(duration ~ dominant +  key + (1 + key|subject),
 summary(fit2)
 ```
 
+# ANOVA 
+```{r}
+anova(fit, fit1, fit2)
+
+```
 
 # Graphing
 
@@ -177,12 +191,12 @@ summary(fit2)
 - This is a point plot with line plot connect the points
 - I am comparing the dominance(syn + asyn) across 54 participants
 - I am expecting that the line should overall going up because participants should overall spend more time on syn stimulus
-```{r line plot average syn vs asyn, fig.cap = "Average Duration for Syn and Asyn"}
+```{r lineplot, fig.cap = "Average Duration for Syn and Asyn"}
 ggplot(average_duration, aes(x = dominant, 
                              y = average_duration,
                              group = subject,
                              color = factor(subject)))+
-  geom_line(aes(linetype = factor(subject)), size = 1) +
+  geom_line(size = .3, alpha = .5) +
   geom_point(size = 3) +
   stat_summary(aes(group = 1), fun = mean, geom = "line", linetype = "solid", color = "black", size = 1) +
   labs(title = "Average duration for syn and asyn",
@@ -199,6 +213,7 @@ ggplot(average_duration, aes(x = dominant,
         strip.background = element_rect(fill = "darkgreen"),
         strip.text = element_text(color = "white", hjust = 0),
         text = element_text(family = "Times New Roman"))
+
 ```
 
 ### Histogram
@@ -206,7 +221,7 @@ ggplot(average_duration, aes(x = dominant,
 - This is a histogram
 - I am comparing the difference across 54 participants
 - I am anticipate to see more results lies on >0 because when Syn - Asyn should be positive values
-```{r Histogram substracted difference syn - asyn, fig.cap = "Histogram for substracted difference"}
+```{r Histogram, fig.cap = "Histogram for substracted difference", echo = FALSE}
 average_diff <- average_duration %>%
   group_by(subject, sync_side) %>%
   summarise(diff_duration = mean(average_duration[dominant == "synchronous"]) - mean(average_duration[dominant == "asynchronous"]))
@@ -228,6 +243,37 @@ ggplot(average_diff, aes(x = diff_duration)) +
         strip.text = element_text(color = "white", hjust = 0),
         text = element_text(family = "Times New Roman"))
 ```
+```{r kable, echo = FALSE, fig.cap = "Generalized Linear Mixed-Effects Models key + subject"}
+# Extracting information from the GLMM summary
+summary_data <- data.frame(
+  Effect = c("Intercept", "Dominant", "Key"),
+  Estimate = c(0.906608, 0.019277, 0.032863),
+  `SEr` = c(0.046824, 0.007174, 0.027494),
+  `t-value` = c(19.362, 2.687, 1.195),
+  `p-value` = c("< 2e-16", "0.00721**", 0.23198)
+)
+
+
+# Print the table using kable
+caption_text = "<span style='font-family: Times; font-size: 16px; font-style: italic;'>Generalized Linear Mixed-Effects Models key + subject</span>"
+fit2_kable <- kable(summary_data, 
+      align = c("l", "r", "r", "r", "r"),
+      escape = FALSE,
+      caption = caption_text,
+      row_spec = list(c(0:10), background = rep(c("#f7f7f7", "#ffffff"), length.out = 11))) %>%
+  kable_styling(position = "left", full_width = F, font_size = 15) %>% 
+  column_spec(1:5, width = "1in") %>%
+  add_header_above(c(" ", "Estimate and SE" = 2, "Model fit" = 2))
+
+# Add a footnote inside the table
+fit2_kable <- fit2_kable %>%
+  footnote(general = "*p < 0.05, **p < 0.01, ***p < 0.001")
+fit2_kable
+```
+
+
+
+
 ```{r}
 
 
