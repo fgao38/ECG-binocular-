@@ -176,24 +176,24 @@ ggplot(sp_first_name, aes(y = species_first_name, fill = gender)) +
 # Assignment 12
 
 transformed_data <- sw.wranged %>%
-  mutate(gender = case_when(
+  mutate('Gender Presentation' = case_when(
     gender == "f" ~ "Female",
     gender == "m" ~ "Male",
     is.na(gender) ~ "Other",
     TRUE ~ as.character(gender)
   ))
-transformed_data$gender <- factor(transformed_data$gender, 
+transformed_data$`Gender Presentation` <- factor(transformed_data$`Gender Presentation`, 
                                               levels = c("Female", "Male", "Other"))
 
-ggplot(transformed_data, aes(x = height_cm, y = mass, fill = gender)) +
+ggplot(transformed_data, aes(x = height_cm, y = mass, color = `Gender Presentation`)) +
   geom_smooth(method = "lm", se = TRUE) +
-  geom_point(aes(color = gender)) +
+  geom_point() +
+  facet_wrap(vars(`Gender Presentation`), scales = "free_y") +
   labs(title = "Height and weight across gender presentation",
        x = "Height(cm)",
        y = "Mass(kg)",
        subtitle = "A cautionary tale in misleading 'free' axis scales & bad design choices",
        caption = "Color hint: use the ggsci pacakge!")+
-  facet_wrap(~gender, scales = "free") +
   coord_cartesian(xlim = c(50, 250)) +
   theme(plot.caption = element_text(angle = 180, vjust = 0, hjust = 0, color = "red"),
         panel.background = element_rect(fill = 'mistyrose'),
