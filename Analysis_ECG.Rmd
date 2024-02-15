@@ -115,6 +115,58 @@ filtered_data <- final %>%
 
 ### Conducting analysis
 
+```{r descreptive analysis}
+summary(filtered_data)
+# As we can see from the summary, participant on average spent 2.42 seconds on viewing each stimulus. Mean = 2.42, Median = # 1.91. Min = 0.05, max = 57.03
+summary(average_duration)
+
+# Create a subset for synchronous durations
+synchronous_data <- filtered_data[filtered_data$dominant == "synchronous", ]
+
+# Create a subset for asynchronous durations
+asynchronous_data <- filtered_data[filtered_data$dominant == "asynchronous", ]
+
+
+# Calculate mean, max, min, and median for synchronous durations
+mean_synchronous <- mean(synchronous_data$duration)
+max_synchronous <- max(synchronous_data$duration)
+min_synchronous <- min(synchronous_data$duration)
+median_synchronous <- median(synchronous_data$duration)
+
+# Calculate mean, max, min, and median for asynchronous durations
+mean_asynchronous <- mean(asynchronous_data$duration)
+max_asynchronous <- max(asynchronous_data$duration)
+min_asynchronous <- min(asynchronous_data$duration)
+median_asynchronous <- median(asynchronous_data$duration)
+
+# Display the results
+cat("Synchronous Duration:\n")
+cat("Mean:", mean_synchronous, "\n")
+cat("Max:", max_synchronous, "\n")
+cat("Min:", min_synchronous, "\n")
+cat("Median:", median_synchronous, "\n")
+
+cat("\nAsynchronous Duration:\n")
+cat("Mean:", mean_asynchronous, "\n")
+cat("Max:", max_asynchronous, "\n")
+cat("Min:", min_asynchronous, "\n")
+cat("Median:", median_asynchronous, "\n")
+
+# Synchronous Mean = 2.45, Median = 1.96, Max = 57.02, Min = 0.05. 
+# Asynchronous Mean = 2.39, Median = 1.91, Max = 36.07, Min = 0.05
+# Synchronous Mean(2.45) > Asynchronous Mean(2.39)
+```
+
+```{r descriptiive data graph}
+ggplot(filtered_data, aes(x = duration, fill = dominant)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Distribution of Synchronous and Asynchronous Durations", 
+       x = "Duration", y = "Density") +
+  coord_cartesian(xlim = c(0, 5)) +
+  theme_minimal()
+
+```
+
 ```{r paired t-test}
 # Example of the t-test
   
@@ -183,6 +235,21 @@ summary(fit2)
 anova(fit, fit1, fit2)
 
 ```
+
+Analysis: After conducting 3 glmer models, ANOVA suggests to use the fit2 Model. So I am going to analyze the fit2 model. 
+Indepdent variable: dominant + key
+Dependent variable: duration 
+Random intercept: Subject
+Random slope: Key
+Family: Gamma
+
+The use of random intercept and slope is to account for the individual differences, and the family = Gamma is to assume the data has a gamma distibution rather than normal distribution. 
+
+Hypothesis: We hypothesized that the synchronous side of the stimulus will be viewed longer than the asynchronous side. 
+Results: The result suggested that synchronous side does viewed significantly longer than the asynchronous side. 
+
+We used glmer mixed effect model because binocular rivalry paradigm is typically not normally distributed, rather the literature suggested that it is usually gamma distirbuted. 
+
 
 # Graphing
 
