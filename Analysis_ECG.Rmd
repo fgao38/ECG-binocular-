@@ -155,7 +155,7 @@ t.test(sync, async, paired = TRUE, alternative = 'greater')
 # conducting Generalized Linear Mixed-Effects Models dominant + subject
 
 ```{r glmer dominant and subject}
-glmer(duration ~ dominant + (1 + dominant|subject), 
+glmer(duration ~ dominant + (1 + dominant|subject),  
       family = Gamma(link = 'log'), 
       data = filtered_data)
 fit <- glmer(duration ~ dominant + (1 + dominant|subject), 
