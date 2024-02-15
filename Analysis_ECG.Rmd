@@ -7,7 +7,7 @@ output:
     toc: true
 ---
 
-This is my first (Table \@ref(tab:kable)); this is my first (Figure \@ref(fig:lineplot)), and this is my second (Figure \@ref(fig:Histogram))
+This is my first (Table \@ref(tab:kable)); this is my first (Figure \@ref(fig:lineplot)), and this is my second (Figure \@ref(fig:Histogram)). 
 
 
 
