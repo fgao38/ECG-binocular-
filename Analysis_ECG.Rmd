@@ -2,9 +2,11 @@
 title: "data_cleaning"
 author: "Fan Gao (Scott)"
 date: "2024-01-17"
-output: 
+output:
   bookdown::html_document2:
-    toc: true
+    toc: yes
+  pdf_document:
+    toc: yes
 ---
 
 This is my first (Table \@ref(tab:kable)); this is my first (Figure \@ref(fig:lineplot)), and this is my second (Figure \@ref(fig:Histogram)). 
@@ -263,7 +265,7 @@ ggplot(average_duration, aes(x = dominant,
                              y = average_duration,
                              group = subject,
                              color = factor(subject)))+
-  geom_line(size = .3, alpha = .5) +
+  geom_line(linewidth = .3, alpha = .5) +
   geom_point(size = 3) +
   stat_summary(aes(group = 1), fun = mean, geom = "line", linetype = "solid", color = "black", size = 1) +
   labs(title = "Average duration for syn and asyn",
