@@ -3,6 +3,9 @@ title: "data_cleaning"
 author: "Fan Gao (Scott)"
 date: "2024-01-17"
 output:
+  html_document:
+    toc: yes
+    df_print: paged
   bookdown::html_document2:
     toc: yes
   pdf_document:
@@ -10,7 +13,6 @@ output:
 ---
 
 This is my first (Table \@ref(tab:kable)); this is my first (Figure \@ref(fig:lineplot)), and this is my second (Figure \@ref(fig:Histogram)). 
-
 
 
 # Importing packages 
@@ -158,6 +160,9 @@ cat("Median:", median_asynchronous, "\n")
 # Asynchronous Mean = 2.39, Median = 1.91, Max = 36.07, Min = 0.05
 # Synchronous Mean(2.45) > Asynchronous Mean(2.39)
 ```
+The mean duration of synchronous stimulus is `r round(mean_synchronous,3)`, and the meadian is `r round(median_synchronous,3)`; the mean duration of asynchronous stimulus is `r round(mean_asynchronous,3)`, and the median is `r round(median_asynchronous,3)`
+
+
 
 ```{r descriptiive data graph}
 ggplot(filtered_data, aes(x = duration, fill = dominant)) +
@@ -232,6 +237,18 @@ fit2 <- glmer(duration ~ dominant +  key + (1 + key|subject),
 summary(fit2)
 ```
 
+```{r fit2-p-value}
+# Extract p-values
+p_values <- summary(fit2)$coefficients[, "Pr(>|z|)"]
+
+# Extract the p-value for 'dominantsynchronous'
+p_value_dominantsynchronous <- p_values["dominantsynchronous"]
+p_value_keyright  <- p_values["keyright"]
+```
+
+The p value for Generalized mixed effect model suggests that the duration between synchronous and asynchronous stimulus is significantly different: p = `r p_value_dominantsynchronous`, and the side of the dominant is not significantly affecting the duration: p = `r p_value_keyright`
+
+
 # ANOVA 
 ```{r}
 anova(fit, fit1, fit2)
@@ -284,6 +301,14 @@ ggplot(average_duration, aes(x = dominant,
         text = element_text(family = "Times New Roman"))
 
 ```
+The average duration for synchronous stimuli on the left side is `r mean(filter(average_duration, dominant == "synchronous" & sync_side == "left")$average_duration)`. 
+
+Similarly, the average duration for synchronous stimuli on the right side is `r mean(filter(average_duration, dominant == "synchronous" & sync_side == "right")$average_duration)`. 
+
+For asynchronous stimuli, the average duration on the left side is `r mean(filter(average_duration, dominant == "asynchronous" & sync_side == "left")$average_duration)`, and on the right side is `r mean(filter(average_duration, dominant == "asynchronous" & sync_side == "right")$average_duration)`.
+
+
+
 
 ### Histogram
 - The substracted average duration Syn - Asyn are on x-axis, the y axis represents count
