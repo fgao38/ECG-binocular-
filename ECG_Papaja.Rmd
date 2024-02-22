@@ -22,7 +22,7 @@ authornote: |
   For this apa 6 style pdf document, I used Tinytex [https://github.com/rstudio/tinytex-releases]. 
 
 abstract: |
-  Though we are unconscious of most bodily sensations (e.g. immune system), in a place where the internal (i.e. self) and external (i.e. physical world) interact, interoceptive stimuli—the sensation that arises from an internal organ (e.g. heartbeat), have been found to yield an unexpected influence over how we see and sense the world (i.e. exteroceptive stimuli).  A substantial prior study has been dedicated to exploring how external stimuli affect our body and brain. For example, intentionally observing and recognizing external stimuli typically results in a deceleration of the heart rate, referred to as “bradycardia of attention” (Lacey, Kagan, Lacey, & Moss, 1963). Such an effect is further examined in a follow-up study that showed subjects’ heart rate decreased following a ready signal (Lacey & Lacey, 1978). These findings have provided us with a novel understanding of how exteroceptive stimuli (e.g. a ready signal at a traffic light) influence our interoceptive stimuli (e.g. heart rate), but also raises the interesting question about the reverse effect: could interoceptive stimuli have an influence on exteroceptive stimuli? The question may seem counterintuitive at first since most of the interoceptive stimuli within one’s self are not accessible (e.g. immune system, heartbeat). For example, studies have suggested that only a quarter of the participants could perceive and judge their heart rate that closely synchronized with external stimuli above chance (Brener, 2016). How can these interoceptive stimuli affect our perception of the world if we, for the most of time, do not have conscious access to them? Yet, recent research has shed light on this question.
+  Though we are unconscious of most bodily sensations (e.g. immune system), in a place where the internal (i.e. self) and external (i.e. physical world) interact, interoceptive stimuli—the sensation that arises from an internal organ (e.g. heartbeat), have been found to yield an unexpected influence over how we see and sense the world (i.e. exteroceptive stimuli).  A substantial prior study has been dedicated to exploring how external stimuli affect our body and brain. For example, intentionally observing and recognizing external stimuli typically results in a deceleration of the heart rate, referred to as “bradycardia of attention” (Lacey, Kagan, Lacey, & Moss, 1963). Such an effect is further examined in a follow-up study that showed subjects’ heart rate decreased following a ready signal (Lacey & Lacey, 1978). These findings have provided us with a novel understanding of how exteroceptive stimuli (e.g. a ready signal at a traffic light) influence our interoceptive stimuli (e.g. heart rate), but also raises the interesting question about the reverse effect: could interoceptive stimuli have an influence on exteroceptive stimuli? The question may seem counterintuitive at first since most of the interoceptive stimuli within one’s self are not accessible (e.g. immune system, heartbeat). For example, studies have suggested that only a quarter of the participants could perceive and judge their heart rate that closely synchronized with external stimuli above chance [@brener_towards_2016]. How can these interoceptive stimuli affect our perception of the world if we, for the most of time, do not have conscious access to them? Yet, recent research has shed light on this question.
 
   
   <!-- https://tinyurl.com/ybremelq -->
@@ -30,7 +30,7 @@ abstract: |
 keywords          : "ECG,Binocular-rivalry-paradigm,heart-rate,vision"
 wordcount         : "X"
 
-bibliography      : "r-references.bib"
+bibliography      : "my_library.bib"
 
 floatsintext      : no
 linenumbers       : yes
@@ -55,6 +55,7 @@ source("Assignment02.R")
 
 ### *Hello_world* function
 
+[@]
 ```{r function, include = TRUE, warning = FALSE}
 source("Function.R")
 ```
@@ -64,6 +65,15 @@ source("Function.R")
 set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
+# Introduction
+
+Though we are unconscious of most bodily sensations (e.g. immune system), in a place where the internal (i.e. self) and external (i.e. physical world) interact, interoceptive stimuli—the sensation that arises from an internal organ (e.g. heartbeat), have been found to yield an unexpected influence over how we see and sense the world (i.e. exteroceptive stimuli).  
+A substantial prior study has been dedicated to exploring how external stimuli affect our body and brain. For example, intentionally observing and recognizing external stimuli typically results in a deceleration of the heart rate, referred to as “bradycardia of attention” (Lacey, Kagan, Lacey, & Moss, 1963). Such an effect is further examined in a follow-up study that showed subjects’ heart rate decreased following a ready signal (Lacey & Lacey, 1978). These findings have provided us with a novel understanding of how exteroceptive stimuli (e.g. a ready signal at a traffic light) influence our interoceptive stimuli (e.g. heart rate), but also raise the interesting question about the reverse effect: could interoceptive stimuli have an influence on exteroceptive stimuli? The question may seem counterintuitive at first since most of the interoceptive stimuli within one’s self are not accessible (e.g. immune system, heartbeat). For example, studies have suggested that only a quarter of the participants can perceive and judge their heart rate that is closely synchronized with external stimuli above chance [@brener_towards_2016]. How can these interoceptive stimuli affect our perception of the world if we, for the most of time, do not have conscious access to them? Yet, recent research has shed light on this question.
+For instance, the heart rate and gastrointestinal tract (GI) are shown to be continuously producing electrical activity, thus sending messages to the brain, and eventually altering our perception and cognition [@azzalini_visceral_2019]. In addition, it is suggested that interoceptive stimuli may play a significant role in shaping emotions and cognition, and this process is derived from a low-level function—homeostatic regulation (Smith, 2017). These emotional states can, in turn, affect how we perceive the world. For instance, we may perceive a neutral stimulus as threatening when we are in an anxious state. 
+One study investigating the subjective experience of body ownership (EBO) presented even more compelling evidence of interaction between interoceptive and exteroceptive stimuli by showing that during the induction of a “fake” rubber hand, participants exhibited an increased sense of EBO if the heartbeat were synchronized with the color change of the rubber hand  [@suzuki_multisensory_2013]. Another study delves into examining how activation of certain cortical areas impacts subjects’ hits and misses on a visual signal detection task: participants were asked to identify whether or not they saw a faint annulus; the study showed that the activation of ventromedial prefrontal cortex bilaterally (vACC-vmPFC), the site known for receiving cardiac inputs, were more likely to have participants consciously perceive the faint annulus [@park_spontaneous_2014]. 
+To our knowledge, despite these prior investigations on interoceptive and exteroceptive interaction, there is limited research that closely examines this effect visually. Also, there is still a notable gap in the existing literature, particularly in the context of visual bistable perceptual switching. Visual bistable perceptual switching refers to presenting participants with two visual stimuli, each of which dominates the visual field for a short period of time. This is usually achieved by using the binocular rivalry paradigm [@carmel_how_2010]. While prior studies have primarily investigated the realm of detection thresholds (A binary response: whether the signal or not), it is important to study this effect more comprehensively in a bistable perception. When perception oscillates between two ambiguous stimuli, it suggests dynamic processes at play in the brain. Understanding the mechanism of how the brain suppresses these perceptual ambiguities can shed light on fundamental aspects of perception and consciousness. 
+To fill in the gap, our research plans to use a binocular rivalry paradigm [@carmel_how_2010], where one of two competing visual stimuli will be synchronized with the subjects’ heartbeat (i.e. electrocardiogram ECG signals) in real-time. Our goal is to investigate whether the synchronization of interoceptive stimuli (i.e. heartbeat) will influence the prioritization of the visual stimuli in conscious awareness. Based on earlier studies that examined the effect of interoceptive stimuli on the brain [@@azzalini_visceral_2019] and homeostasis regulation [@ryan_intergration_2017], we hypothesized to find that the visual stimulus that matched with the participant’s real-time heartbeat should overall dominate the visual field longer than the stimulus that was not synchronized. In addition, we also expect to see that this effect is not dependent on participants' conscious awareness of their heartbeat sensations. 
+
 
 # Methods
 
@@ -91,7 +101,7 @@ We aim to collect 60 undergraduate students taking Psychology courses at the Uni
 
 ## Data analysis
 
-We used `r cite_r("r-references.bib")` for all our analyses.
+We used `r cite_r("my_library.bib")` for all our analyses.
 
 # Results
 
@@ -100,5 +110,5 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 \newpage
 
 # References
+r
 
-[Lacey, J.I., Kagan, J., Lacey, B.C. and Moss, H.A. (1963) The Visceral Level: Situational Determinants and Behavioral Correlates of Autonomic Response Patterns. In: Knapp, P.H., Ed., Expression of the Emotions in Man, International Universities Press, New York, 161-196.](https://www.scirp.org/reference/referencespapers?referenceid=3036305)

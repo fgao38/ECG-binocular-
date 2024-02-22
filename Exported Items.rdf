@@ -1,0 +1,95 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:vcard="http://nwalsh.com/rdf/vCard#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:dcterms="http://purl.org/dc/terms/">
+    <bib:Book rdf:about="https://www.R-project.org/">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr>
+                    <vcard:Address>
+                       <vcard:locality>Vienna, Austria</vcard:locality>
+                    </vcard:Address>
+                </vcard:adr>
+                <foaf:name>R Foundation for Statistical Computing</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                       <foaf:surname>R Core Team</foaf:surname>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dc:title>R: A Language and Environment for Statistical Computing</dc:title>
+        <dc:date>2022</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://www.R-project.org/</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Book>
+    <bib:Book rdf:about="https://github.com/crsh/papaja">
+        <z:itemType>book</z:itemType>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Aust</foaf:surname>
+                        <foaf:givenName>Frederik</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Barth</foaf:surname>
+                        <foaf:givenName>Marius</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_9"/>
+        <dc:title>papaja: Prepare reproducible APA journal articles with R Markdown</dc:title>
+        <dc:date>2023</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+               <rdf:value>https://github.com/crsh/papaja</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Book>
+    <bib:Memo rdf:about="#item_9">
+        <rdf:value>&lt;p&gt;R package version 0.1.2&lt;/p&gt;</rdf:value>
+        <rdf:type rdf:resource="http://purl.org/net/biblio#Memo"/>
+        <z:itemType>note</z:itemType>
+        <rdf:value>&lt;p&gt;R package version 0.1.2&lt;/p&gt;</rdf:value>
+    </bib:Memo>
+    <bib:Book rdf:about="https://cran.r-project.org/package=tinylabels">
+        <z:itemType>book</z:itemType>
+        <bib:authors>
+            <rdf:Seq>
+                <rdf:li>
+                    <foaf:Person>
+                        <foaf:surname>Barth</foaf:surname>
+                        <foaf:givenName>Marius</foaf:givenName>
+                    </foaf:Person>
+                </rdf:li>
+            </rdf:Seq>
+        </bib:authors>
+        <dcterms:isReferencedBy rdf:resource="#item_11"/>
+        <dc:title>tinylabels: Lightweight Variable Labels</dc:title>
+        <dc:date>2023</dc:date>
+        <dc:identifier>
+            <dcterms:URI>
+                <rdf:value>https://cran.r-project.org/package=tinylabels</rdf:value>
+            </dcterms:URI>
+        </dc:identifier>
+    </bib:Book>
+    <bib:Memo rdf:about="#item_11">
+       <rdf:value>&lt;p&gt;R package version 0.2.4&lt;/p&gt;</rdf:value>
+    </bib:Memo>
+</rdf:RDF>
