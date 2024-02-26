@@ -166,6 +166,18 @@
 
 \linenumbers
 \usepackage{csquotes}
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\bfseries\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -253,15 +265,25 @@ Though we are unconscious of most bodily sensations (e.g.~immune system), in a p
 ## [1] "Today is: Sunday Yes! I have no classes today"
 \end{verbatim}
 
+\hypertarget{practice_citation}{%
+\section{Practice\_Citation}\label{practice_citation}}
+
+This is using year only: Lacey in (1978) found that heart rate decrased following a ready signal.
+
+This is a way to move author out of the parentheses: Lacey and Lacey (1978) states that subjects' heart rate decreased following a ready signal
+
+This is adding a page number: subjects' heart rate decreased following a ready signal(see Lacey \& Lacey, 1978, pg 99-113)
+
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
 Though we are unconscious of most bodily sensations (e.g.~immune system), in a place where the internal (i.e.~self) and external (i.e.~physical world) interact, interoceptive stimuli---the sensation that arises from an internal organ (e.g.~heartbeat), have been found to yield an unexpected influence over how we see and sense the world (i.e.~exteroceptive stimuli).\\
 A substantial prior study has been dedicated to exploring how external stimuli affect our body and brain. For example, intentionally observing and recognizing external stimuli typically results in a deceleration of the heart rate, referred to as ``bradycardia of attention'' (Lacey, Kagan, Lacey, \& Moss, 1963). Such an effect is further examined in a follow-up study that showed subjects' heart rate decreased following a ready signal (Lacey \& Lacey, 1978). These findings have provided us with a novel understanding of how exteroceptive stimuli (e.g.~a ready signal at a traffic light) influence our interoceptive stimuli (e.g.~heart rate), but also raise the interesting question about the reverse effect: could interoceptive stimuli have an influence on exteroceptive stimuli? The question may seem counterintuitive at first since most of the interoceptive stimuli within one's self are not accessible (e.g.~immune system, heartbeat). For example, studies have suggested that only a quarter of the participants can perceive and judge their heart rate that is closely synchronized with external stimuli above chance (Brener \& Ring, 2016). How can these interoceptive stimuli affect our perception of the world if we, for the most of time, do not have conscious access to them? Yet, recent research has shed light on this question.
-For instance, the heart rate and gastrointestinal tract (GI) are shown to be continuously producing electrical activity, thus sending messages to the brain, and eventually altering our perception and cognition (Azzalini, Rebollo, \& Tallon-Baudry, 2019). In addition, it is suggested that interoceptive stimuli may play a significant role in shaping emotions and cognition, and this process is derived from a low-level function---homeostatic regulation (Smith, 2017). These emotional states can, in turn, affect how we perceive the world. For instance, we may perceive a neutral stimulus as threatening when we are in an anxious state.
-One study investigating the subjective experience of body ownership (EBO) presented even more compelling evidence of interaction between interoceptive and exteroceptive stimuli by showing that during the induction of a ``fake'' rubber hand, participants exhibited an increased sense of EBO if the heartbeat were synchronized with the color change of the rubber hand (Suzuki, Garfinkel, Critchley, \& Seth, 2013). Another study delves into examining how activation of certain cortical areas impacts subjects' hits and misses on a visual signal detection task: participants were asked to identify whether or not they saw a faint annulus; the study showed that the activation of ventromedial prefrontal cortex bilaterally (vACC-vmPFC), the site known for receiving cardiac inputs, were more likely to have participants consciously perceive the faint annulus (Park, Correia, Ducorps, \& Tallon-Baudry, 2014).
-To our knowledge, despite these prior investigations on interoceptive and exteroceptive interaction, there is limited research that closely examines this effect visually. Also, there is still a notable gap in the existing literature, particularly in the context of visual bistable perceptual switching. Visual bistable perceptual switching refers to presenting participants with two visual stimuli, each of which dominates the visual field for a short period of time. This is usually achieved by using the binocular rivalry paradigm (Carmel, Arcaro, Kastner, \& Hasson, 2010). While prior studies have primarily investigated the realm of detection thresholds (A binary response: whether the signal or not), it is important to study this effect more comprehensively in a bistable perception. When perception oscillates between two ambiguous stimuli, it suggests dynamic processes at play in the brain. Understanding the mechanism of how the brain suppresses these perceptual ambiguities can shed light on fundamental aspects of perception and consciousness.
-To fill in the gap, our research plans to use a binocular rivalry paradigm (Carmel et al., 2010), where one of two competing visual stimuli will be synchronized with the subjects' heartbeat (i.e.~electrocardiogram ECG signals) in real-time. Our goal is to investigate whether the synchronization of interoceptive stimuli (i.e.~heartbeat) will influence the prioritization of the visual stimuli in conscious awareness. Based on earlier studies that examined the effect of interoceptive stimuli on the brain (@ Azzalini et al., 2019) and homeostasis regulation (Smith, Thayer, Khalsa, \& Lane, 2017), we hypothesized to find that the visual stimulus that matched with the participant's real-time heartbeat should overall dominate the visual field longer than the stimulus that was not synchronized. In addition, we also expect to see that this effect is not dependent on participants' conscious awareness of their heartbeat sensations.
+For instance, the heart rate and gastrointestinal tract (GI) are shown to be continuously producing electrical activity, thus sending messages to the brain, and eventually altering our perception and cognition (Azzalini et al., 2019). In addition, it is suggested that interoceptive stimuli may play a significant role in shaping emotions and cognition, and this process is derived from a low-level function---homeostatic regulation (Smith et al., 2017). These emotional states can, in turn, affect how we perceive the world. For instance, we may perceive a neutral stimulus as threatening when we are in an anxious state.
+One study investigating the subjective experience of body ownership (EBO) presented even more compelling evidence of interaction between interoceptive and exteroceptive stimuli by showing that during the induction of a ``fake'' rubber hand, participants exhibited an increased sense of EBO if the heartbeat were synchronized with the color change of the rubber hand (Suzuki et al., 2013). Another study delves into examining how activation of certain cortical areas impacts subjects' hits and misses on a visual signal detection task: participants were asked to identify whether or not they saw a faint annulus; the study showed that the activation of ventromedial prefrontal cortex bilaterally (vACC-vmPFC), the site known for receiving cardiac inputs, were more likely to have participants consciously perceive the faint annulus (Park et al., 2014).
+Recently, the impact of cardiac activity on exteroceptive perception gained significant attention, particularly fueled by recent theories emphasizing the crucial role of interoception in shaping the subjective sense of self(Park et al., 2014; Seth \& Tsakiris, 2018).
+To our knowledge, despite these prior investigations on interoceptive and exteroceptive interaction, there is limited research that closely examines this effect visually. Also, there is still a notable gap in the existing literature, particularly in the context of visual bistable perceptual switching. Visual bistable perceptual switching refers to presenting participants with two visual stimuli, each of which dominates the visual field for a short period of time. This is usually achieved by using the binocular rivalry paradigm (Carmel et al., 2010). While prior studies have primarily investigated the realm of detection thresholds (A binary response: whether the signal or not), it is important to study this effect more comprehensively in a bistable perception. When perception oscillates between two ambiguous stimuli, it suggests dynamic processes at play in the brain. Understanding the mechanism of how the brain suppresses these perceptual ambiguities can shed light on fundamental aspects of perception and consciousness.
+To fill in the gap, our research plans to use a binocular rivalry paradigm (Carmel et al., 2010), where one of two competing visual stimuli will be synchronized with the subjects' heartbeat (i.e.~electrocardiogram ECG signals) in real-time. Our goal is to investigate whether the synchronization of interoceptive stimuli (i.e.~heartbeat) will influence the prioritization of the visual stimuli in conscious awareness. Based on earlier studies that examined the effect of interoceptive stimuli on the brain (Azzalini et al., 2019) and homeostasis regulation (Smith et al., 2017), we hypothesized to find that the visual stimulus that matched with the participant's real-time heartbeat should overall dominate the visual field longer than the stimulus that was not synchronized. In addition, we also expect to see that this effect is not dependent on participants' conscious awareness of their heartbeat sensations.
 
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
@@ -290,7 +312,7 @@ We aim to collect 60 undergraduate students taking Psychology courses at the Uni
 \item
   ECG data was implemented in Python (see Data and Code Availability) using Lab Streaming Layer (LSL, labstreaminglayer.org)
 \item
-  ECG data were bandpass filtered to 5-15 Hz, and R-peaks were detected using the Pan-Thompkins algorithm (Pan \& Tompkins, 1985), modified from an existing implementation for LabGraph compatibility (Sznajder \& Łukowska, 2017)
+  ECG data were bandpass filtered to 5-15 Hz, and R-peaks were detected using the Pan-Thompkins algorithm (Pan \& Tompkins, 1985), modified from an existing implementation for LabGraph compatibility (Michał Sznajder \& Łukowska, 2017)
 \end{itemize}
 
 \hypertarget{procedure}{%
@@ -299,7 +321,7 @@ We aim to collect 60 undergraduate students taking Psychology courses at the Uni
 \hypertarget{data-analysis}{%
 \subsection{Data analysis}\label{data-analysis}}
 
-We used R {[}Version 4.2.2; (\textbf{R-base?}){]} for all our analyses.
+We used R {[}Version 4.2.2; R Core Team (2022){]} for all our analyses.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -307,12 +329,14 @@ We used R {[}Version 4.2.2; (\textbf{R-base?}){]} for all our analyses.
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
+Although the research field has shifted attention to study interoceptive stimuli on exteroceptive stimuli, there are a limited number of studies that examined this effect in vision. In addition, previous studies tend to focus on investigating this effect with a detection threshold paradigm (A binary response: whether the signal or not), it is unclear the mechanism that the brain uses to suppress perceptual ambiguity.\\
+The results of our study extend beyond a simple examination of interoceptive stimuli of exteroceptive stimuli. Understanding the influential effect of our unconscious internal sensations on our conscious perception has a broader meaning across various aspects of human life and the scientific field. An enhanced understanding of interoceptive cues could facilitate new and more effective ways of treating mental disorders such as depression and anxiety. For instance, if the accelerated heartbeat is causing a negative emotional state and thus leading to symptoms of depression and anxiety, therapies could develop new interventions that aim to help the patients become more aware of the interoceptive stimuli, making individuals manage the emotional impact led by interoceptive stimuli, thereby alleviate the depression and anxiety symptoms. Furthermore, interoceptive stimuli such as heartbeat, accompanied with other diagnostic criteria can be used as a sign to predict certain mental disorders. For example, anxiety is marked by excessive worries and fears that tend to trigger a fight or flight response. The heartbeat is likely to get accelerated when an individual is deciding whether to fight or flight. Therefore, internal sensations such as heartbeat, can also serve as a complementary diagnostic information to improve current therapeutic interventions.
+
 \newpage
 
 \hypertarget{references}{%
-\section{References}\label{references}}
-
-r
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
@@ -323,13 +347,28 @@ Azzalini, D., Rebollo, I., \& Tallon-Baudry, C. (2019). Visceral {Signals} {Shap
 Brener, J., \& Ring, C. (2016). Towards a psychophysics of interoceptive processes: The measurement of heartbeat detection. \emph{Philosophical Transactions of the Royal Society B: Biological Sciences}, \emph{371}(1708), 20160015. \url{https://doi.org/10.1098/rstb.2016.0015}
 
 \leavevmode\vadjust pre{\hypertarget{ref-carmel_how_2010}{}}%
-Carmel, D., Arcaro, M., Kastner, S., \& Hasson, U. (2010). How to {Create} and {Use} {Binocular} {Rivalry}. \emph{Journal of Visualized Experiments}, (45), 2030. \url{https://doi.org/10.3791/2030}
+Carmel, D., Arcaro, M., Kastner, S., \& Hasson, U. (2010). How to {Create} and {Use} {Binocular} {Rivalry}. \emph{Journal of Visualized Experiments}, \emph{45}, 2030. \url{https://doi.org/10.3791/2030}
+
+\leavevmode\vadjust pre{\hypertarget{ref-laceyTwowayCommunicationHeart1978}{}}%
+Lacey, B. C., \& Lacey, J. I. (1978). Two-way communication between the heart and the brain: {Significance} of time within the cardiac cycle. \emph{American Psychologist}, \emph{33}(2), 99--113. \url{https://doi.org/10.1037/0003-066X.33.2.99}
+
+\leavevmode\vadjust pre{\hypertarget{ref-michalsznajderPythonOnlineOffline2017}{}}%
+Michał Sznajder, \& Łukowska, M. (2017). \emph{Python {Online} and {Offline} {ECG} {QRS} {Detector} based on the {Pan}-{Tomkins} algorithm}. Zenodo. \url{https://doi.org/10.5281/ZENODO.583770}
+
+\leavevmode\vadjust pre{\hypertarget{ref-panRealTimeQRSDetection1985}{}}%
+Pan, J., \& Tompkins, W. J. (1985). A {Real}-{Time} {QRS} {Detection} {Algorithm}. \emph{IEEE Transactions on Biomedical Engineering}, \emph{BME-32}(3), 230--236. \url{https://doi.org/10.1109/TBME.1985.325532}
 
 \leavevmode\vadjust pre{\hypertarget{ref-park_spontaneous_2014}{}}%
 Park, H.-D., Correia, S., Ducorps, A., \& Tallon-Baudry, C. (2014). Spontaneous fluctuations in neural responses to heartbeats predict visual detection. \emph{Nature Neuroscience}, \emph{17}(4), 612--618. \url{https://doi.org/10.1038/nn.3671}
 
-\leavevmode\vadjust pre{\hypertarget{ref-ryan_intergration_2017}{}}%
-Smith, R., Thayer, J. F., Khalsa, S. S., \& Lane, R. D. (2017). The hierarchical basis of neurovisceral integration. \emph{Neuroscience and Biobehavioral Reviews}, \emph{75}, 274--296. \url{https://doi.org/10.1016/j.neubiorev.2017.02.003}
+\leavevmode\vadjust pre{\hypertarget{ref-R-base}{}}%
+R Core Team. (2022). \emph{R: {A} {Language} and {Environment} for {Statistical} {Computing}}. R Foundation for Statistical Computing. \url{https://www.R-project.org/}
+
+\leavevmode\vadjust pre{\hypertarget{ref-sethBeingBeastMachine2018}{}}%
+Seth, A. K., \& Tsakiris, M. (2018). Being a {Beast} {Machine}: {The} {Somatic} {Basis} of {Selfhood}. \emph{Trends in Cognitive Sciences}, \emph{22}(11), 969--981. \url{https://doi.org/10.1016/j.tics.2018.08.008}
+
+\leavevmode\vadjust pre{\hypertarget{ref-smithHierarchicalBasisNeurovisceral2017}{}}%
+Smith, R., Thayer, J. F., Khalsa, S. S., \& Lane, R. D. (2017). The hierarchical basis of neurovisceral integration. \emph{Neuroscience \& Biobehavioral Reviews}, \emph{75}, 274--296. \url{https://doi.org/10.1016/j.neubiorev.2017.02.003}
 
 \leavevmode\vadjust pre{\hypertarget{ref-suzuki_multisensory_2013}{}}%
 Suzuki, K., Garfinkel, S. N., Critchley, H. D., \& Seth, A. K. (2013). Multisensory integration across exteroceptive and interoceptive domains modulates self-experience in the rubber-hand illusion. \emph{Neuropsychologia}, \emph{51}(13), 2909--2917. \url{https://doi.org/10.1016/j.neuropsychologia.2013.08.014}
