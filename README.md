@@ -14,15 +14,67 @@
 
 ### ECG-binocular-
 
--   *Analysis ECG markdown*
-    -   Analysis_ECG.html
-    -   Analysis_ECG.pdf
-    -   Analysis_ECG.Rmd
--   *class_data*
-    -   (class materials)
--   *ECG_Papaja*
-    -   ECG_Papaja
-    -   r-reference.bib
-    -   My Library.bib
-    -   my_library.bib
+├── Analysis ECG markdown
+│   ├── Analysis_ECG.Rmd
+│   ├── Analysis_ECG.html
+│   ├── Analysis_ECG.pdf
+│   └── Analysis_ECG_files
+│       ├── figure-gfm
+│       │   ├── Histogram substracted difference syn - asyn-1.png
+│       │   └── line plot average syn vs asyn-1.png
+│       └── figure-latex
+│           ├── descriptiive data graph-1.pdf
+│           └── lineplot-1.pdf
+├── ECG-binocular-.Rproj
+├── ECG_Papaja
+│   ├── Assignment02.R
+│   ├── ECG_Papaja.Rmd
+│   ├── ECG_Papaja.fff
+│   ├── ECG_Papaja.pdf
+│   ├── ECG_Papaja.tex
+│   ├── ECG_Papaja.ttt
+│   ├── ECG_Papaja_files
+│   │   └── figure-latex
+│   │       ├── Histogram-1.pdf
+│   │       ├── Histogram-1.png
+│   │       ├── descriptiive data graph-1.pdf
+│   │       ├── descriptiive data graph-1.png
+│   │       ├── lineplot-1.pdf
+│   │       └── lineplot-1.png
+│   ├── My Library.bib
+│   ├── WechatIMG317.jpeg
+│   ├── WechatIMG318.jpeg
+│   ├── bids_dataset
+│   │   ├── Binocular_rivalry
+│   │   ├── README.md
+│   │   ├── compiled_part.csv
+│   │   ├── dataset_description.json
+│   │   ├── participants.json
+│   │   ├── participants.tsv
+│   ├── my_library.bib
+│   └── r-references.bib
+├── README.md
+├── class_data
+│   ├── Data-prep.R
+│   ├── Function.R
+│   ├── MM Data.xlsx
+│   ├── adult-data.csv
+│   ├── gestures.xlsx
+│   ├── git_cheat_sheet.pdf
+│   ├── starwars.R
+│   ├── stats-demo.Rmd
+│   └── sw-wrangled.csv
+└── localonly
+    ├── Analysis_ECG.log
+    ├── Analysis_ECG.md
+    ├── Analysis_ECG.tex
+    ├── ECG-Papaja.tex
+    ├── ECG_Papaja.fff
+    ├── ECG_Papaja.tex
+    ├── ECG_Papaja.ttt
+    ├── Exported Items.rdf
+    ├── dataprep-demo.R
+    ├── local_testing.md
+    └── physio_jn123_420.textClipping
+
 
