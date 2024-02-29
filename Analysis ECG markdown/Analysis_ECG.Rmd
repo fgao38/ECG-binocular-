@@ -171,7 +171,6 @@ ggplot(filtered_data, aes(x = duration, fill = dominant)) +
        x = "Duration", y = "Density") +
   coord_cartesian(xlim = c(0, 5)) +
   theme_minimal()
-
 ```
 
 ```{r paired t-test}
@@ -214,9 +213,6 @@ t.test(sync, async, paired = TRUE, alternative = 'greater')
 # conducting Generalized Linear Mixed-Effects Models dominant + subject
 
 ```{r glmer dominant and subject}
-glmer(duration ~ dominant + (1 + dominant|subject),  
-      family = Gamma(link = 'log'), 
-      data = filtered_data)
 fit <- glmer(duration ~ dominant + (1 + dominant|subject), 
              family = Gamma(link = 'log'), 
              data = filtered_data)
@@ -337,6 +333,7 @@ ggplot(average_diff, aes(x = diff_duration)) +
         strip.text = element_text(color = "white", hjust = 0),
         text = element_text(family = "Times New Roman"))
 ```
+
 ```{r kable, echo = FALSE, fig.cap = "Generalized Linear Mixed-Effects Models key + subject"}
 # Extracting information from the GLMM summary
 summary_data <- data.frame(
@@ -354,7 +351,7 @@ fit2_kable <- kable(summary_data,
       align = c("l", "r", "r", "r", "r"),
       escape = FALSE,
       caption = caption_text,
-      row_spec = list(c(0:10), background = rep(c("#f7f7f7", "#ffffff"), length.out = 11))) %>%
+      row_spec = list(c(0:10), background = rep(c("#f7f7f7", "#ffffff"), length.out = 11)))%>%
   kable_styling(position = "left", full_width = F, font_size = 15) %>% 
   column_spec(1:5, width = "1in") %>%
   add_header_above(c(" ", "Estimate and SE" = 2, "Model fit" = 2))

@@ -1,0 +1,14 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{ECG_Papaja_files/figure-latex/lineplot-1.pdf}
+\caption{\label{fig:lineplot}Average Duration for Syn and Asyn}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{ECG_Papaja_files/figure-latex/Histogram-1.pdf}
+\caption{\label{fig:Histogram}Histogram for substracted difference}
+\end{figure*}

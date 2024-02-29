@@ -1,0 +1,20 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{tab:kable}Generalized Linear Mixed-Effects Models subject random intercept}
+\fontsize{15}{17}\selectfont
+\begin{tabular}[t]{>{\raggedright\arraybackslash}p{1in}|>{\raggedleft\arraybackslash}p{1in}|>{\raggedleft\arraybackslash}p{1in}|>{\raggedleft\arraybackslash}p{1in}|>{\raggedleft\arraybackslash}p{1in}}
+\hline
+\multicolumn{1}{c|}{ } & \multicolumn{2}{c|}{Estimate and SE} & \multicolumn{2}{c}{Model fit} \\
+\cline{2-3} \cline{4-5}
+Effect & Estimate & SEr & t.value & p.value\\
+\hline
+Intercept & 0.927540 & 0.045024 & 20.601 & < 2e-16\\
+\hline
+Dominant & 0.019123 & 0.007245 & 2.639 & 0.00831**\\
+\hline
+\multicolumn{5}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{5}{l}{\rule{0pt}{1em}*p < 0.05, **p < 0.01, ***p < 0.001}\\
+\end{tabular}
+\end{table*}

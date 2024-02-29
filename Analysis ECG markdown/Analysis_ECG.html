@@ -2145,7 +2145,9 @@ median is 1.91</p>
 <pre class="r"><code># t = -2.5272(p&lt;0.05)  lme4/glmer</code></pre>
 <pre class="r"><code># Assuming your data frame is named df
 library(lme4)</code></pre>
+<pre><code>## Warning: package &#39;lme4&#39; was built under R version 4.2.3</code></pre>
 <pre><code>## Loading required package: Matrix</code></pre>
+<pre><code>## Warning: package &#39;Matrix&#39; was built under R version 4.2.3</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;Matrix&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:tidyr&#39;:
@@ -2240,25 +2242,6 @@ t.test(sync, async, paired = TRUE)</code></pre>
 <div id="conducting-generalized-linear-mixed-effects-models-dominant-subject" class="section level1">
 <h1>conducting Generalized Linear Mixed-Effects Models dominant +
 subject</h1>
-<pre class="r"><code>glmer(duration ~ dominant + (1 + dominant|subject),  
-      family = Gamma(link = &#39;log&#39;), 
-      data = filtered_data)</code></pre>
-<pre><code>## Generalized linear mixed model fit by maximum likelihood (Laplace
-##   Approximation) [glmerMod]
-##  Family: Gamma  ( log )
-## Formula: duration ~ dominant + (1 + dominant | subject)
-##    Data: filtered_data
-##       AIC       BIC    logLik  deviance  df.resid 
-##  84544.07  84593.15 -42266.04  84532.07     26361 
-## Random effects:
-##  Groups   Name                Std.Dev. Corr
-##  subject  (Intercept)         0.22353      
-##           dominantsynchronous 0.07758  0.05
-##  Residual                     0.69029      
-## Number of obs: 26367, groups:  subject, 54
-## Fixed Effects:
-##         (Intercept)  dominantsynchronous  
-##             0.92288              0.02574</code></pre>
 <pre class="r"><code>fit &lt;- glmer(duration ~ dominant + (1 + dominant|subject), 
              family = Gamma(link = &#39;log&#39;), 
              data = filtered_data)
