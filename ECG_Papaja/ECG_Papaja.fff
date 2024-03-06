@@ -1,5 +1,15 @@
 \begin{figure*}[hbt]
 \ifnextchar[{\eatarg}{}
+[h]
+\includegraphics[width=2.18in]{WechatIMG318} \caption{ECG}\label{fig:ECG}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\includegraphics[width=1\linewidth]{WechatIMG317} \caption{ }\label{fig:Heartbeat}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
 
 \centering
 \includegraphics{ECG_Papaja_files/figure-latex/lineplot-1.pdf}
