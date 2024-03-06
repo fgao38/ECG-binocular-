@@ -34,18 +34,17 @@ abstract: |
   <!-- https://tinyurl.com/ybremelq -->
   
 keywords          : "ECG,Binocular-rivalry-paradigm,heart-rate,vision"
-wordcount         : "X"
+wordcount         : "1758"
 
 bibliography      : "my_library.bib"
-
-floatsintext      : no
+floatsintext      : yes
 linenumbers       : yes
 draft             : no
 mask              : no
-
 figurelist        : no
 tablelist         : no
 footnotelist      : no
+figsintext        : yes
 header-includes:
   - |
     \makeatletter
@@ -65,24 +64,21 @@ classoption       : "man"
 output            : papaja::apa6_pdf
 ---
 
-```{r setup, include = TRUE, warning = FALSE}
-#library("papaja")
-#r_refs("r-references.bib")
-#tinytex::install_tinytex(version = "2020.10")
-#tinytex::install_tinytex(bundle = 'TinyTeX')
-source("Assignment02.R")
-```
-
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
-library(dplyr)
-library(readr)
+library(papaja)
 library(tidyverse)
-library(ggplot2)
 library(stats)
-library(knitr)
 library(kableExtra)
 library(lme4)
-library(sjPlot)
+library(Require)
+options(repos = c(CRAN = "https://cloud.r-project.org/"))
+Require(c("dplyr","readr","ggplot2","knitr","sjPlot","tinytex"))
+#library(dplyr)
+#library(readr)
+#library(ggplot2)
+#library(knitr)
+#library(sjPlot)
+#library(tinytex)
 ```
 
 ```{r Counting number of files, echo = FALSE}
@@ -164,6 +160,17 @@ set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
 
+```{r}
+# Extracting information from the GLMM summary
+summary_data <- data.frame(
+  Effect = c("Intercept", "Dominant"),
+  Estimate = c(0.927540, 0.019123),
+  `SEr` = c(0.045024, 0.007245),
+  `t-value` = c(20.601, 2.639),
+  `p-value` = c("< 2e-16", "0.00831**")
+)
+```
+
 # Introduction
 
 Though we are unconscious of most bodily sensations (e.g. immune system), in a place where the internal (i.e. self) and external (i.e. physical world) interact, interoceptive stimuli—the sensation that arises from an internal organ (e.g. heartbeat), have been found to yield an unexpected influence over how we see and sense the world (i.e. exteroceptive stimuli).  
@@ -172,22 +179,18 @@ For instance, the heart rate and gastrointestinal tract (GI) are shown to be con
 One study investigating the subjective experience of body ownership (EBO) presented even more compelling evidence of interaction between interoceptive and exteroceptive stimuli by showing that during the induction of a “fake” rubber hand, participants exhibited an increased sense of EBO if the heartbeat were synchronized with the color change of the rubber hand  [@suzuki_multisensory_2013]. These similar embodiment effect were also observed in breathing[@montiEmbreathmentIllusionHighlights2020].Another study delves into examining how activation of certain cortical areas impacts subjects’ hits and misses on a visual signal detection task: participants were asked to identify whether or not they saw a faint annulus; the study showed that the activation of ventromedial prefrontal cortex bilaterally (vACC-vmPFC), the site known for receiving cardiac inputs, were more likely to have participants consciously perceive the faint annulus [@park_spontaneous_2014]. 
 Recently, the impact of cardiac activity on exteroceptive perception gained significant attention, particularly fueled by recent theories emphasizing the crucial role of interoception in shaping the subjective sense of self[@park_spontaneous_2014;@sethBeingBeastMachine2018].
 To our knowledge, despite these prior investigations on interoceptive and exteroceptive interaction, there is limited research that closely examines this effect visually. Also, there is still a notable gap in the existing literature, particularly in the context of visual bistable perceptual switching. Visual bistable perceptual switching refers to presenting participants with two visual stimuli, each of which dominates the visual field for a short period of time. This is usually achieved by using the binocular rivalry paradigm [@carmel_how_2010]. While prior studies have primarily investigated the realm of detection thresholds (A binary response: whether the signal or not), it is important to study this effect more comprehensively in a bistable perception. When perception oscillates between two ambiguous stimuli, it suggests dynamic processes at play in the brain. Understanding the mechanism of how the brain suppresses these perceptual ambiguities can shed light on fundamental aspects of perception and consciousness. 
-To fill in the gap, our research plans to use a binocular rivalry paradigm [@carmel_how_2010], where one of two competing visual stimuli will be synchronized with the subjects’ heartbeat (i.e. electrocardiogram ECG signals) in real-time. Our goal is to investigate whether the synchronization of interoceptive stimuli (i.e. heartbeat) will influence the prioritization of the visual stimuli in conscious awareness. Based on earlier studies that examined the effect of interoceptive stimuli on the brain [@azzalini_visceral_2019] and homeostasis regulation [@smithHierarchicalBasisNeurovisceral2017], we hypothesized to find that the visual stimulus that matched with the participant’s real-time heartbeat should overall dominate the visual field longer than the stimulus that was not synchronized. In addition, we also expect to see that this effect is not dependent on participants' conscious awareness of their heartbeat sensations. 
-
+To fill in the gap, our research plans to use a binocular rivalry paradigm [@carmel_how_2010], where one of two competing visual stimuli will be synchronized with the subjects’ heartbeat (i.e. electrocardiogram ECG signals) in real-time. Our goal is to investigate whether the synchronization of interoceptive stimuli (i.e. heartbeat) will influence the prioritization of the visual stimuli in conscious awareness. Based on earlier studies that examined the effect of interoceptive stimuli on the brain [@azzalini_visceral_2019] and homeostasis regulation [@smithHierarchicalBasisNeurovisceral2017], we hypothesized to find that the visual stimulus that matched with the participant’s real-time heartbeat should overall dominate the visual field longer than the stimulus that was not synchronized. In addition, we also expect to see that this effect is not dependent on participants' conscious awareness of their heartbeat sensations.  
 
 # Methods
-  As written in my authornote, my role in this study include data collection, writing the original draft preparation, as well as review and editing.
-  Our experiment is going to be divided into two parts.In the first section, we are planning to use a binocular rivalry paradigm -- presenting different visual stimuli, one to each eye of the participant; because the brain cannot process two visual stimuli simultaneously, one visual stimulus will dominate the other visual stimulus, see Figure 1. 
-![Figure 1](WechatIMG318.jpeg)
 
-The idea is to synchronize one of the visual stimuli with the participant's heartbeat (measured by using an electrocardiogram ECG) in real-time; the synchronization of the heartbeat and visual stimulus is randomized, see Figure 2.
-![Figure 2](WechatIMG317.jpeg)
-Participants are not going to be told that one of the stimuli was synchronized with their real-time ECG; the Participants will identify which visual stimulus they are currently viewing by pressing the left (red) and right (blue) arrow keys.
-  In the second section, we are going to measure whether the participants could judge the external stimulus that is synchronized with their own heartbeat correctly. This will be done by presenting two pulsing circles, one synchronizes with the participant's ECG (immediately followed at the R peak) and the other one does not (followed later after the R peak).
+As written in my authornote, my role in this study included data collection, writing the original draft preparation, as well as review and editing.  
+Our experiment was divided into two parts.In the first section, we were planning to use a binocular rivalry paradigm -- presenting different visual stimuli, one to each eye of the participant; because the brain cannot process two visual stimuli simultaneously, one visual stimulus will dominate the other visual stimulus, see Figure \@ref(fig:ECG).  
+The idea was to synchronize one of the visual stimuli with the participant's heartbeat (measured by using an electrocardiogram ECG) in real-time; the synchronization of the heartbeat and visual stimulus was randomized, see Figure\@ref(fig:Heartbeat).  
+Participants were not told that one of the stimuli was synchronized with their real-time ECG; the Participants identified which visual stimulus they were currently viewing by pressing the left (red) and right (blue) arrow keys.  
+In the second section, we measured whether the participants could judge the external stimulus that is synchronized with their own heartbeat correctly. This was done by presenting two pulsing circles, one synchronizes with the participant's ECG (immediately followed at the R peak) and the other one does not (followed later after the R peak).  
 
 ## Participants
-
-  We aim to collect 60 undergraduate students taking Psychology courses at the University of Chicago. We are going to recruit participants through an online platform named SONA (Psychological and Brain Science Research System). Participants will need to have normal color vision and see well without glasses, as well as consent to participate in our study. Our participants' sample may not be representative since our sample consists of only college students, specifically students who are taking introductory Psychology courses. The introductory Psychology courses include a diverse population of students with different majors and backgrounds, but it is biased toward college and well-educated students at University of Chicago. However, as mentioned above, we do not expect that our results will vary significantly across races and genders since this effect is mostly driven by biological factors within the body. We are going to send our study protocol to the University of Chicago institutional review board for approval.
+We aimed to collect 60 undergraduate students taking Psychology courses at the University of Chicago. We are going to recruit participants through an online platform named SONA (Psychological and Brain Science Research System). Participants needed to have normal color vision and see well without glasses, as well as consented to participate in our study. Our participants' sample may not be representative since our sample consists of only college students, specifically students who are taking introductory Psychology courses. The introductory Psychology courses include a diverse population of students with different majors and backgrounds, but it is biased toward college and well-educated students at University of Chicago. However, as mentioned above, we did expect that our results will vary significantly across races and genders since this effect is mostly driven by biological factors within the body. We were going to send our study protocol to the University of Chicago institutional review board for approval.  
 
 ## Material
 
@@ -199,16 +202,26 @@ We used `r cite_r("my_library.bib")` for all our analyses.
 
 # Results
 
-The mean duration of synchronous stimulus is `r round(mean_synchronous,3)`, and the meadian is `r round(median_synchronous,3)`; the mean duration of asynchronous stimulus is `r round(mean_asynchronous,3)`, and the median is `r round(median_asynchronous,3)`
-
-The results of the generalized linear mixed-effects model (glmer) are presented in (Table \@ref(tab:kable)). The glmer revealed significant effects for the dominant variable (Estimate=0.02, t=2.64, p<0.05). This suggests that on average, the duration is expected to be increase by 0.02 seconds for synchronous stimulus compared to asynchronous stimulus. 
+In the binocular rivalry task, the mean duration of synchronous stimulus is `r round(mean_synchronous,3)`, and the meadian is `r round(median_synchronous,3)`; the mean duration of asynchronous stimulus is `r round(mean_asynchronous,3)`, and the median is `r round(median_asynchronous,3)`.The results of the generalized linear mixed-effects model (glmer) are presented in Table \@ref(tab:kable). The glmer revealed significant effects for the dominant variable (Estimate=`r summary_data$Estimate[2]`, SE =`r summary_data$SEr[2]`,t=`r summary_data$t.value[2]`, p=`r summary_data$p.value[2]`). This suggests that on average, the duration is expected to be increase by 0.02 seconds for synchronous stimulus compared to asynchronous stimulus. The individual difference are visualized in Figure \@ref(fig:lineplot). In addition, the subtracted differences (average synchronous stimulus - average asynchronous stimulus) are visualized in Figure \@ref(fig:histogram).
 
 # Discussion
 Although the research field has shifted attention to study interoceptive stimuli on exteroceptive stimuli, there are a limited number of studies that examined this effect in vision. In addition, previous studies tend to focus on investigating this effect with a detection threshold paradigm (A binary response: whether the signal or not), it is unclear the mechanism that the brain uses to suppress perceptual ambiguity.  
 The results of our study extend beyond a simple examination of interoceptive stimuli of exteroceptive stimuli. Understanding the influential effect of our unconscious internal sensations on our conscious perception has a broader meaning across various aspects of human life and the scientific field. An enhanced understanding of interoceptive cues could facilitate new and more effective ways of treating mental disorders such as depression and anxiety. For instance, if the accelerated heartbeat is causing a negative emotional state and thus leading to symptoms of depression and anxiety, therapies could develop new interventions that aim to help the patients become more aware of the interoceptive stimuli, making individuals manage the emotional impact led by interoceptive stimuli, thereby alleviate the depression and anxiety symptoms. Furthermore, interoceptive stimuli such as heartbeat, accompanied with other diagnostic criteria can be used as a sign to predict certain mental disorders. For example, anxiety is marked by excessive worries and fears that tend to trigger a fight or flight response. The heartbeat is likely to get accelerated when an individual is deciding whether to fight or flight. Therefore, internal sensations such as heartbeat, can also serve as a complementary diagnostic information to improve current therapeutic interventions. 
 The present study was conducted within a controlled laboratory environment, which may limit the extent to which the findings can be extrapolated to real-world settings. While the controlled environment allowed for precise manipulation of variables, the ecological validity of the results may be constrained. Future research could consider incorporating more ecologically valid scenarios to enhance the external validity of the study.Another potential limitation of this study is the specificity of the sample population. Participants in this study were students from University of Chicago, and caution should be exercised when generalizing the findings to a broader and more diverse population. Future research could explore the generalizability of the observed effects across different demographic groups to provide a more comprehensive understanding of the phenomenon under investigation.
 
-```{r lineplot, fig.cap = "Average Duration for Syn and Asyn", warning = FALSE, message = FALSE}
+
+\newpage
+
+# Appendix
+```{r ECG, fig.cap="participants wear glasses that the left eye sees color red and right eye sees blue. The brain will suppress one of the colors to make the other color more dominant, so the participant will only be able to see one color at a time. Participants will indicate which color that they are currently perceiving by clicking the key left (red) and right (blue).",fig.show='hold',fig.pos='H', fig.align='center',out.width='30%'}
+knitr::include_graphics("WechatIMG318.jpeg")
+```
+
+```{r Heartbeat, fig.cap="one of the colors is randomly selected to be synchronized with participants’ own heartbeat, the pulsing of the synchronized color will follow immediately after participants’ R peak showing in the electrocardiogram, and the unsynchronized color will follow later after participants’ R peak.",fig.show='hold',fig.pos='H',fig.align='center',out.width='50%'}
+knitr::include_graphics("WechatIMG317.jpeg")
+```
+
+```{r lineplot, fig.cap = "Average Duration for Syn and Asyn", warning = FALSE, message = FALSE,fig.pos='H',out.width='70%',fig.align='center'}
 ggplot(average_duration, aes(x = dominant, 
                              y = average_duration,
                              group = subject,
@@ -224,8 +237,7 @@ ggplot(average_duration, aes(x = dominant,
   theme_minimal()
 ```
 
-
-```{r Histogram, fig.cap = "Histogram for substracted difference", warning = FALSE, message = FALSE}
+```{r histogram, fig.cap = "Histogram for substracted difference", warning = FALSE, message = FALSE,fig.pos='H',out.width='70%',fig.align='center'}
 average_diff <- average_duration %>%
   group_by(subject, sync_side) %>%
   summarise(diff_duration = mean(average_duration[dominant == "synchronous"]) - mean(average_duration[dominant == "asynchronous"]))
@@ -236,29 +248,10 @@ ggplot(average_diff, aes(x = diff_duration)) +
        x = "Difference in Duration",
        y = "Count",
        subtitle = "n=54") +
-  facet_wrap(~sync_side, scales = "free") +
   theme_minimal()
 ```
 
-```{r glmer dominant and subject, echo = FALSE, warning = FALSE, message = FALSE}
-fit <- glmer(duration ~ dominant + (1|subject), 
-              family = Gamma(link = 'log'), 
-              data = filtered_data)
-
-# tab_model(fit, show.se = TRUE, show.df = TRUE, show.stat = TRUE)
-
-```
-
-```{r kable, echo = FALSE, fig.cap = "Generalized Linear Mixed-Effects Models random intercept subject"}
-# Extracting information from the GLMM summary
-summary_data <- data.frame(
-  Effect = c("Intercept", "Dominant"),
-  Estimate = c(0.927540, 0.019123),
-  `SEr` = c(0.045024, 0.007245),
-  `t-value` = c(20.601, 2.639),
-  `p-value` = c("< 2e-16", "0.00831**")
-)
-
+```{r kable, echo = FALSE, fig.cap = "Generalized Linear Mixed-Effects Models random intercept subject",out.width='70%'}
 
 # Print the table using kable
 caption_text = "Generalized Linear Mixed-Effects Models subject random intercept"
@@ -276,9 +269,18 @@ fit2_kable <- fit2_kable %>%
   footnote(general = "*p < 0.05, **p < 0.01, ***p < 0.001")
 fit2_kable
 ```
+```{r glmer dominant and subject, echo = FALSE, warning = FALSE, message = FALSE}
+fit <- glmer(duration ~ dominant + (1|subject), 
+              family = Gamma(link = 'log'), 
+              data = filtered_data)
+# tab_model(fit, show.se = TRUE, show.df = TRUE, show.stat = TRUE)
+```
+\
+\
+\
+\
+\
 
 \newpage
 
 # References
-
-
